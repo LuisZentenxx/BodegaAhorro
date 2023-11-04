@@ -7,11 +7,10 @@ function logOutFun() {
   window.location.href = '/login'
 }
 
-const baseURL = import.meta.env.VITE_BACKEND_URL
-console.log()
+const baseURL = "http://127.0.0.1:8000";
 
 export const axi = axios.create({
-  baseURL,
+  baseURL
 })
 
 export const authApi = axios.create({
