@@ -37,12 +37,13 @@ Este proyecto es una aplicación web que utiliza Django para el backend, React c
     ```bash
     npm install
 8. **Iniciar la aplicación web**: Para iniciar la aplicación, es necesario tener tanto el servidor de Django como el servidor de desarrollo del frontend en ejecución. Abre dos terminales separadas, una para el backend y otra para el frontend.
-   1. En la terminal del backend (tuproyecto/backend), inicia el servidor de Django.
+   1. En la terminal dirigete al directorio del proyecto (Bodega Ahorro), e inicia el servidor de Django.
         ```bash
-        npm install
-    2. En la terminal del frontend inicia el servidor de desarrollo de React con Vite:
+        py manage.py runserver
+    2. En la terminal dirigete al directorio del frontend 
+     e inicia el servidor de desarrollo de React con Vite:
         ```bash
-        npm run dev
+            npm run dev
 9. **Acceder a la aplicación**: Abre un navegador web y navega a http://localhost:5173 para visualizar la aplicación en ejecución.
 
 ## Estructura del Proyecto
