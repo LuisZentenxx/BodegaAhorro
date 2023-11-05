@@ -4,13 +4,16 @@ from rest_framework import status
 
 from . models import Producto
 from . serializers import ProductSerializer
+from backend.pagination import CustomPagination
 
 #Obtener todos los productos
 @api_view(['GET'])
 def get_products(request):
     products = Producto.objects.all()
-    serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
+    pagination = CustomPagination()
+    paginated_products = pagination.paginate_queryset(products, request)
+    serializer = ProductSerializer(paginated_products, many=True)
+    return pagination.get_paginated_response(serializer.data)
 
 #Obtener un producto mediante su nombre
 @api_view(['GET'])
@@ -38,6 +41,7 @@ def edit_product(request, pk):
     if request.user.is_staff:
         serializer = ProductSerializer(product, data= request.data)
         if serializer.is_valid():
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
     else:
