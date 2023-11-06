@@ -1,27 +1,37 @@
-import { Product } from "../Interfaces"
-import ProductCard from "../components/ProductCard"
-import { get_products } from "../api/products"
-import { useInfiniteQuery } from "react-query"
-import { useEffect } from "react"
-import toast from "react-hot-toast"
-import { useInView } from 'react-intersection-observer'
+import { get_products } from "../api/products";
+import ProductCard from "../components/ProductCard";
+import { Product } from "../Interfaces";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
+
+import toast from "react-hot-toast";
+
 
 const HomePage = () => {
+
     const { ref, inView } = useInView();
 
-    const { data, isLoading, error, isFetchingNextPage, fetchNextPage, hasNextPage }
-        = useInfiniteQuery(["products"], get_products, {
-            getNextPageParam: (page: any) => page.meta.next,
-        });
 
     useEffect(() => {
         if (inView) {
-            fetchNextPage()
+            fetchNextPage();
         }
-    }, [inView])
+    }, [inView]);
 
-    if (isLoading) return <p>Loading...</p>
-    if (error instanceof Error) return <>{toast.error(error.message)}</>
+    const {
+        data,
+        isLoading,
+        error,
+        isFetchingNextPage,
+        fetchNextPage,
+        hasNextPage,
+    } = useInfiniteQuery(["products"], get_products, {
+        getNextPageParam: (page: any) => page.meta.next,
+    });
+
+
+    if (error instanceof Error) return <>{toast.error(error.message)}</>;
 
     return (
         <>
@@ -61,5 +71,5 @@ const HomePage = () => {
         </>
     );
 };
-    
-export default HomePage
+
+export default HomePage;

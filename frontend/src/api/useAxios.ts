@@ -14,12 +14,12 @@ export const axi = axios.create({
   baseURL
 })
 
-export const authApi = axios.create({
+export const authAxios = axios.create({
   baseURL,
   withCredentials: true,
 });
 
-authApi.interceptors.request.use(async (config) => {
+authAxios.interceptors.request.use(async (config) => {
   const token : string = useAuthStore.getState().access;
   config.headers = {
     Authorization: `Bearer ${token}`,
