@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { PrivateRoute, AdminPrivateRoute } from "./components/PrivateRoute";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -16,8 +17,13 @@ function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
 
-          <Route path="admin" element={<AdminPage />} />
-          <Route path="add" element={<AddProductPage />} />
+          <Route element={<PrivateRoute />} >
+          </Route>
+
+          <Route path="admin" element={<AdminPrivateRoute />} >
+            <Route index element={<AdminPage />} />
+            <Route path="add" element={<AddProductPage />} />
+          </Route> 
           
         </Route>
       </Routes>

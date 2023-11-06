@@ -1,6 +1,6 @@
 import { BsFillTrashFill } from "react-icons/bs";
 import { AiFillEdit, AiFillPlusSquare } from "react-icons/ai";
-
+import { Link } from "react-router-dom";
 
 const Products = () => {
 
@@ -21,11 +21,23 @@ const Products = () => {
                         <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">sdsd</th>
                         <td className="px-4 py-3">sdsdsd</td>
                         <td className="px-4 py-3">sdsdsd</td>
+            
                         <td className="px-4 py-3 flex items-center justify-center gap-4">
+
+                            {/* Eliminar Productos */}
                             <BsFillTrashFill size={22}
                                 className="text-red-300 cursor-pointer" />
+                            
+                            {/* Editar Productos */}
+                            <Link to="edit">
                             <AiFillEdit size={22} className="text-white cursor-pointer" />
-                            <AiFillPlusSquare size={22} className="text-green-300 cursor-pointer" />
+                            </Link>
+
+                            {/* Agregar Productos */}
+                            <Link to="add">
+                                <AiFillPlusSquare size={22} className="text-green-300 cursor-pointer" />
+                            </Link>
+
                         </td>
                     </tr>
                 </tbody>

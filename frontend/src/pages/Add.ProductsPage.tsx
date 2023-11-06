@@ -1,6 +1,8 @@
 import React, { useState, ChangeEvent } from 'react';
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postProduct } from '../api/products';
+import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const AddProductPage = () => {
 
@@ -16,15 +18,19 @@ const AddProductPage = () => {
         const inputRef = React.useRef<HTMLInputElement>(null);
         const [isHovered, setIsHovered] = useState(false);
 
+        const navigate = useNavigate();
         const queryClient = useQueryClient();
 
         const addProdMutation = useMutation({
             mutationFn: postProduct ,
             onSuccess: () => {
                 queryClient.invalidateQueries({ queryKey: ["products"] });
+                toast.success("Producto creado!")
+                navigate('/admin')
             },
-            onError: (error) => {
-                console.error(error);
+            onError: () => {
+                toast.error("Error")
+                navigate('/admin')
             },
         });
         
@@ -104,7 +110,7 @@ const AddProductPage = () => {
                                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                                     Agregar Producto
                                 </h3>
-                                <button
+                                <Link to="/admin"
                                     type="button"
                                     className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                                     data-modal-toggle="defaultModal"
@@ -123,7 +129,7 @@ const AddProductPage = () => {
                                         ></path>
                                     </svg>
                                     <span className="sr-only">Close modal</span>
-                                </button>
+                                </Link>
                             </div>
                             <form onSubmit={handleSubmit}>
                                 <div className="grid gap-4 mb-4 sm:grid-cols-2">
