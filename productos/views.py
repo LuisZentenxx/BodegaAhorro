@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
+from django.utils.text import slugify
 
 from . models import Producto
 from . serializers import ProductSerializer
@@ -17,8 +18,8 @@ def get_products(request):
 
 #Obtener un producto mediante su nombre
 @api_view(['GET'])
-def get_product(request, name):
-    products = Producto.objects.get(name=name)
+def get_product(request, slug):
+    products = Producto.objects.get(slug=slug)
     serializer = ProductSerializer(products, many=False)
     return Response(serializer.data)
 
@@ -35,18 +36,24 @@ def create_product(request):
     if request.user.is_staff:
         serializer = ProductSerializer(data= request.data)
         if serializer.is_valid():
-            serializer.save(user=request.user)
+            name = serializer.validated_data['name']
+            category = serializer.validated_data['category']
+            s = name + category
+            slug = slugify(s)
+            if serializer.Meta.model.objects.filter(slug=slug).exists():
+                return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+            serializer.save(user=request.user, slug=slug)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(serializer.data, status=status.HTTP_401_UNAUTHORIZED)
 
 #Editar un producto si tienes permisos de admin.
-@api_view(['POST'])
+@api_view(['PUT'])
 def edit_product(request, pk):
-    product = Producto.objects.get(pk=pk)
+    products = Producto.objects.get(pk=pk)
     if request.user.is_staff:
-        serializer = ProductSerializer(product, data= request.data)
+        serializer = ProductSerializer(products, data= request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)

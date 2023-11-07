@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { edit_product, get_solo_product } from '../api/products';
+import { editProduct, get_solo_product } from '../api/products';
 import { Link, useNavigate, useParams} from 'react-router-dom';
 import toast from 'react-hot-toast';
 
@@ -43,14 +43,15 @@ const EditProductPage = () => {
         const queryClient = useQueryClient();
 
         const editProdMutation = useMutation({
-            mutationFn: edit_product ,
+            mutationFn: editProduct ,
             onSuccess: () => {
                 queryClient.invalidateQueries({ queryKey: ["products"] });
                 toast.success("Producto creado!")
                 navigate('/admin')
             },
-            onError: () => {
+            onError: (error) => {
                 toast.error("Error")
+                console.log(error)
                 navigate('/admin')
             },
         });

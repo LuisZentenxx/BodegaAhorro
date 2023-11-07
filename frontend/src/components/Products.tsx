@@ -68,6 +68,12 @@ const Products = () => {
             </th>
             <th scope="col" className="px-4 py-3 flex justify-center gap-4">
               Acciones
+              <Link to="add">
+                    <AiFillPlusSquare
+                      size={22}
+                      className="text-green-300 cursor-pointer"
+                    />
+                  </Link>
             </th>
           </tr>
         </thead>
@@ -100,12 +106,7 @@ const Products = () => {
                     />
                   </Link>
 
-                  <Link to="add">
-                    <AiFillPlusSquare
-                      size={22}
-                      className="text-green-300 cursor-pointer"
-                    />
-                  </Link>
+              
                 </td>
               </tr>
             ))
