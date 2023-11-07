@@ -22,6 +22,13 @@ def get_product(request, name):
     serializer = ProductSerializer(products, many=False)
     return Response(serializer.data)
 
+#Obtener un producto mediante su id
+@api_view(['GET'])
+def get_product_admin(request, id):
+    products = Producto.objects.get(id=id)
+    serializer = ProductSerializer(products, many=False)
+    return Response(serializer.data)
+
 #Crear un producto si tienes permisos de admin.
 @api_view(['POST'])
 def create_product(request):

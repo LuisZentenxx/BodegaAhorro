@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.get_products),
     path('post/', views.create_product),
     path('get/<str:name>/', views.get_product),
+    path('get/admin/<int:id>/', views.get_product_admin),
     path('edit/<int:pk>/', views.edit_product),
     path('delete/<int:pk>/', views.delete_product),
 ]

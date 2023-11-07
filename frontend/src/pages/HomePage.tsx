@@ -7,11 +7,8 @@ import { useEffect } from "react";
 
 import toast from "react-hot-toast";
 
-
 const HomePage = () => {
-
     const { ref, inView } = useInView();
-
 
     useEffect(() => {
         if (inView) {
@@ -30,7 +27,6 @@ const HomePage = () => {
         getNextPageParam: (page: any) => page.meta.next,
     });
 
-
     if (error instanceof Error) return <>{toast.error(error.message)}</>;
 
     return (
@@ -43,10 +39,7 @@ const HomePage = () => {
                             className="p-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-16"
                         >
                             {page.data.map((product: Product) => (
-                                <ProductCard
-                                    key={product.id}
-                                    product={product}
-                                />
+                                <ProductCard key={product.id} product={product} />
                             ))}
                         </div>
                     </div>
@@ -61,9 +54,7 @@ const HomePage = () => {
                         data.pages.length > 0 &&
                         hasNextPage && (
                             <div ref={ref}>
-                                {isLoading || isFetchingNextPage ? (
-                                    <p>Loading...</p>
-                                ) : null}
+                                {isLoading || isFetchingNextPage ? <p>Loading...</p> : null}
                             </div>
                         )}
                 </>
