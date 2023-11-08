@@ -1,6 +1,13 @@
 import { Product } from "../Interfaces";
 import { authAxios, axi} from "./useAxios";
 
+
+export const search_prod = async (query : string) => {
+  const response = await authAxios.get(`/products/search/?query=${query}`);
+  return response.data
+}
+
+
 export const get_solo = async (slug : string) => {
   const response = await authAxios.get(`/products/get/${slug}/`);
   return response.data
