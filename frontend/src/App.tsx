@@ -10,6 +10,9 @@ import SoloProductPage from "./pages/SoloProductPage";
 import AdminPage from "./pages/AdminPage";
 import AddProductPage from "./pages/Add.ProductsPage";
 import EditProductPage from "./pages/EditProductPage";
+import CategoryPage from "./pages/CategoryPage";
+import SearchByCatePage from "./pages/SearchByCatePage";
+
 
 function App() {
   return (
@@ -20,6 +23,8 @@ function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="product/:slug" element={<SoloProductPage />} />
+          <Route path="cate" element={<CategoryPage />} />
+          <Route path="cate/:cate" element={<SearchByCatePage />} />
 
           <Route element={<PrivateRoute />} >
           </Route>

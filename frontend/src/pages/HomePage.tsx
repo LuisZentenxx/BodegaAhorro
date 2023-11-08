@@ -4,8 +4,8 @@ import { Product } from "../Interfaces";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
-
 import toast from "react-hot-toast";
+
 
 const HomePage = () => {
     const { ref, inView } = useInView();

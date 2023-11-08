@@ -2,15 +2,23 @@ import { useState } from "react"
 import Products from "../components/Products"
 import Users from "../components/Users"
 import Orders from "../components/Orders"
+import { search_prod } from "../api/products"
+import { useQuery } from "@tanstack/react-query"
 
 const AdminPage = () => {
 
-  const [show, setShow] = useState(0)
+  const [show, setShow] = useState(0);
+  const [search, setSearch] = useState("");
 
-  // 1- search input
-  // 2- if 0, 1, 2 hace fetch a una funcion diferente
-  // 3- Motra los resultados en SearchUsers, SearchOrders, SearchProducts
-  // 4- Si show es igual a 0 y no input -> Products else SearchProducts
+  const { data } = useQuery({
+      queryKey: ['products', search],
+      queryFn: () => {
+          if (search && show === 0) {
+              return search_prod(search)
+          }
+          return { products: [] }
+      }
+  })
 
   return (
 <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
@@ -26,7 +34,12 @@ const AdminPage = () => {
                                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <input type="text" id="simple-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Buscar"/>
+                            <input 
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            type="text" 
+                            id="simple-search" 
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Buscar"/>
                         </div>
                     </form>
                 </div>
@@ -49,7 +62,7 @@ const AdminPage = () => {
                   
                     </div>
             </div>
-          {show === 0 && <Products/>}
+          {show === 0 && <Products results={data}/>}
           {show === 1 && <Orders/>}
           {show === 2 && <Users/>}
        
