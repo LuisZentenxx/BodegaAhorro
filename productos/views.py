@@ -55,11 +55,17 @@ def edit_product(request, pk):
     if request.user.is_staff:
         serializer = ProductSerializer(products, data= request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+            name = serializer.validated_data['name']
+            category = serializer.validated_data['category']
+            s = name + category
+            slug = slugify(s)
+            if serializer.Meta.model.objects.filter(slug=slug).exists():
+                return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+            serializer.save(user=request.user, slug=slug)
+            return Response(serializer.data)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
     else:
-        return Response(serializer.data, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 #Eliminar un producto si tienes permisos de admin.
 @api_view(['DELETE'])

@@ -33,6 +33,8 @@ const Products = () => {
     getNextPageParam: (page: any) => page.meta.next,
   });
 
+  console.log(data)
+
   const queryClient = useQueryClient();
 
   const deleteProdMutation = useMutation({
