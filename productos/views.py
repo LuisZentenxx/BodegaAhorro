@@ -7,6 +7,13 @@ from . models import Producto
 from . serializers import ProductSerializer
 from backend.pagination import CustomPagination
 
+
+@api_view(['GET'])
+def get_product_by_cate(request, category):
+    products = Producto.objects.filter(category=category)
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
 @api_view(['GET'])
 def search(request):
     query = request.query_params.get('query')

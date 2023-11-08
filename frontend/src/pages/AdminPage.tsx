@@ -3,6 +3,8 @@ import Products from "../components/Products"
 import Users from "../components/Users"
 import Orders from "../components/Orders"
 import { search_prod } from "../api/products"
+import { search_users } from "../api/users"
+
 import { useQuery } from "@tanstack/react-query"
 
 const AdminPage = () => {
@@ -19,6 +21,16 @@ const AdminPage = () => {
           return { products: [] }
       }
   })
+
+  const { data: users } = useQuery({
+    queryKey: ['users', search],
+    queryFn: () => {
+        if (search && show === 2) {
+            return search_users(search)
+        }
+        return { users: [] }
+    }
+})
 
   return (
 <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
@@ -64,7 +76,7 @@ const AdminPage = () => {
             </div>
           {show === 0 && <Products results={data}/>}
           {show === 1 && <Orders/>}
-          {show === 2 && <Users/>}
+          {show === 2 && <Users results={users}/>}
        
         </div>
     </div>

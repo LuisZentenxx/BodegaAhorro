@@ -5,10 +5,12 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-
+import SearchResultsPage from "./SearchResultsPage";
+import { useSearchStore } from "../store/search";
 
 const HomePage = () => {
     const { ref, inView } = useInView();
+    const searchTerm = useSearchStore((state) => state.searchTerm);
 
     useEffect(() => {
         if (inView) {
@@ -28,6 +30,7 @@ const HomePage = () => {
     });
 
     if (error instanceof Error) return <>{toast.error(error.message)}</>;
+    if (searchTerm) return <SearchResultsPage/>
 
     return (
         <>
