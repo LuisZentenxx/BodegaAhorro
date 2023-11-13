@@ -21,10 +21,13 @@ export interface Product {
     id: number
     email: string
     name: string
+    avatar: string;
   }
 
   export interface Token {
       exp: number
       is_staff : boolean;
+      email: string
+      name: string
       avatar : string;
   };
