@@ -33,7 +33,8 @@ const CartPage = () => {
         },
     });
 
-    const createOrder = (data, actions : any) => {
+    const createOrder = (data : any, actions : any) => {
+        console.log(data)
         return actions.order.create({
             purchase_units: [
                 {
@@ -48,7 +49,8 @@ const CartPage = () => {
         });
     };
 
-    const onApprove = (data, actions: any) => {
+    const onApprove = (data : any, actions: any) => {
+        console.log(data)
         return actions.order.capture(handleSubmit());
     };
 

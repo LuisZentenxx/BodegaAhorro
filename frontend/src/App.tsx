@@ -13,6 +13,7 @@ import EditProductPage from "./pages/EditProductPage";
 import CategoryPage from "./pages/CategoryPage";
 import SearchByCatePage from "./pages/SearchByCatePage";
 import CartPage from "./pages/CartPage";
+import UserProfile from "./pages/UserProfile";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
 
           <Route element={<PrivateRoute />} >
             <Route path="cart" element={<CartPage />} />
+            <Route path="profile" element={<UserProfile />} />
           </Route>
 
           <Route path="admin" element={<AdminPrivateRoute />} >
