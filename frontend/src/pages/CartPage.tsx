@@ -3,6 +3,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { create_order } from "../api/orders"
 import toast from "react-hot-toast"
 import { useNavigate } from "react-router-dom"
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
 
 
 const CartPage = () => {
@@ -31,9 +33,27 @@ const CartPage = () => {
         },
     });
 
+    const createOrder = (data, actions : any) => {
+        return actions.order.create({
+            purchase_units: [
+                {
+                    amount: {
+                        value: total_price
+                    },
+                },
+            ],
+            application_context: {
+                shipping_preference: "NO_SHIPPING"
+            }
+        });
+    };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const onApprove = (data, actions: any) => {
+        return actions.order.capture(handleSubmit());
+    };
+
+
+    const handleSubmit = () => {
         createOrderMut.mutate({
             order_items: cart,
             total_price: total_price
@@ -124,13 +144,23 @@ const CartPage = () => {
                             </div>
                         </div>
                     </div>
-                        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                            Datos de Compra
+                            Realizar Pago
                         </h1>
                         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-
-                            <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Crear Orden</button>
+                        <div className="ml-[180px]">
+                            <PayPalScriptProvider 
+                                options={{ 
+                                    clientId: "AWZ1kdhaJoKJ4ovzV9LRfdL09u7lpOX0T717nBulDED7bGHt2UdunvwNvoVHVzk6nShdpcUeKRF2mf31",
+                                    currency: "USD"
+                                    }}>
+                                <PayPalButtons
+                                createOrder={(data, actions) => createOrder(data, actions)}
+                                onApprove={(data, actions) => onApprove(data, actions)}
+                                style={{ layout: "horizontal" }} />
+                            </PayPalScriptProvider>
+                        </div>
                         </form>
                     </div>
                 </div>
