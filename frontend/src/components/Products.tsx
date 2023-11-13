@@ -59,29 +59,29 @@ const Products = ({ results }: Props) => {
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="px-4 py-3">
-                            Product ID
+                            ID Producto
                         </th>
                         <th scope="col" className="px-4 py-3">
-                            Name
-                        </th>
-
-                        <th scope="col" className="px-4 py-3">
-                            Price
+                            Nombre
                         </th>
 
                         <th scope="col" className="px-4 py-3">
-                            Count in stock
+                            Precio
+                        </th>
+
+                        <th scope="col" className="px-4 py-3">
+                            Cantidad en Stock
                         </th>
 
                         <th
                             scope="col"
                             className="px-4 py-3 flex justify-center gap-4"
                         >
-                            Actions
+                            Acciones
                             <Link to="add">
                                 <AiFillPlusSquare
                                     size={22}
-                                    className="text-green-300 cursor-pointer"
+                                    className="text-green-500 cursor-pointer"
                                 />
                             </Link>
                         </th>

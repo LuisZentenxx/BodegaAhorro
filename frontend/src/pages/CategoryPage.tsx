@@ -12,9 +12,9 @@ const CategoryPage  = () => {
                     </Link>
 
                     <div className="p-5">
-                        <Link to={`/cate/OS`}>
+                        <Link to={`/cate/Abarrotes`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                OS
+                                Abarrotes
                             </h5>
                         </Link>
                     </div>
@@ -26,9 +26,9 @@ const CategoryPage  = () => {
                     </Link>
 
                     <div className="p-5">
-                        <Link to={`/cate/Keyboards`}>
+                        <Link to={`/cate/Pastas`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                Keyboards
+                                Pastas
                             </h5>
                         </Link>
                     </div>
@@ -40,9 +40,9 @@ const CategoryPage  = () => {
                     </Link>
 
                     <div className="p-5">
-                        <Link to={`/cate/Lang`}>
+                        <Link to={`/cate/Bebidas`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                Lang
+                                Bebidas
                             </h5>
                         </Link>
                     </div>

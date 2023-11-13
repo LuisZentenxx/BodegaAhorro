@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist', #Maneja autenticación
     'users',
     'productos',
+    'orders',
 ]
 
 MIDDLEWARE = [

@@ -1,7 +1,6 @@
 import { useState } from "react"
 import Products from "../components/Products"
 import Users from "../components/Users"
-import Orders from "../components/Orders"
 import { search_prod } from "../api/products"
 import { search_users } from "../api/users"
 
@@ -61,21 +60,28 @@ const AdminPage = () => {
                 type="button" className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                       Productos
                     </button>
+
                     <button 
                 onClick={() => setShow(1)}
                 type="button" className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                       Ordenes
                     </button>
+                
                     <button 
                 onClick={() => setShow(2)}
                 type="button" className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                       Usuarios
                     </button>
+
+                    <button 
+                onClick={() => setShow(3)}
+                type="button" className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                      Estadisticas
+                    </button>
                   
                     </div>
             </div>
           {show === 0 && <Products results={data}/>}
-          {show === 1 && <Orders/>}
           {show === 2 && <Users results={users}/>}
        
         </div>

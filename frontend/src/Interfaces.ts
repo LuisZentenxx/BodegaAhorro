@@ -11,6 +11,11 @@ export interface Product {
     quantity?: number
     num_reviews?: number
   }
+
+  export interface Order {
+    total_price: number;
+    order_items : Product[];
+}
   
   export interface User{
     id: number

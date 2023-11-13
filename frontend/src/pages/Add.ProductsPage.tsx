@@ -45,8 +45,7 @@ const AddProductPage = () => {
             });
         };
 
-            
-
+        
         const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
             setName(event.target.value);
         };
