@@ -18,10 +18,10 @@ export interface Product {
 }
   
   export interface User{
-    id: number
-    email: string
+    id?: number
+    email?: string
     name: string
-    avatar: string;
+    avatar: File | null;
   }
 
   export interface Token {
@@ -29,5 +29,5 @@ export interface Product {
       is_staff : boolean;
       email: string
       name: string
-      avatar : string;
+      avatar: File | null;
   };
