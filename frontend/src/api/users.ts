@@ -1,6 +1,12 @@
 import { User } from "../Interfaces";
 import { authAxios, axi } from "./useAxios";
 
+
+export const get_solo_user = async (id: number) => {
+  const response = await authAxios.get(`/users/get/solo/${id}/`)
+  return response.data
+};
+
 // Realiza una solicitud PUT para editar un producto en el servidor, utilizando los datos proporcionados, incluida una imagen si está presente.
 export const edit_user = async (data: User) => {
   const formData = new FormData();

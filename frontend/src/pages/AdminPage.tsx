@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Products from "../components/Products"
 import Users from "../components/Users"
+import Orders from "../components/Orders"
 import { search_prod } from "../api/products"
 import { search_users } from "../api/users"
 
@@ -20,6 +21,7 @@ const AdminPage = () => {
           return { products: [] }
       }
   })
+
 
   const { data: users } = useQuery({
     queryKey: ['users', search],
@@ -82,6 +84,7 @@ const AdminPage = () => {
                     </div>
             </div>
           {show === 0 && <Products results={data}/>}
+          {show === 1 && <Orders/>}
           {show === 2 && <Users results={users}/>}
        
         </div>

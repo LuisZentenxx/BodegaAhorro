@@ -19,12 +19,12 @@ const Header = () => {
     const cart = useCartStore(state => state.cart);
 
     let is_admin : boolean;
-    let avatar : string;
+    let user_id : number;
 
     if (isAuth) {
         const tokenDecoded: Token = jwt_decode(token)
         is_admin = tokenDecoded.is_staff;
-        avatar = tokenDecoded.avatar
+        user_id = tokenDecoded.user_id
     }
 
     const serSearchTerm = useSearchStore((state) => state.setSearchTerm);

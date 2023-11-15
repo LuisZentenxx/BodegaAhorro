@@ -14,7 +14,7 @@ import CategoryPage from "./pages/CategoryPage";
 import SearchByCatePage from "./pages/SearchByCatePage";
 import CartPage from "./pages/CartPage";
 import UserProfile from "./pages/UserProfile";
-
+import SoloOrderPage from "./pages/SoloOrderPage";
 
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
           <Route element={<PrivateRoute />} >
             <Route path="cart" element={<CartPage />} />
             <Route path="profile" element={<UserProfile />} />
+            <Route path="order/:id" element={<SoloOrderPage />} />
           </Route>
 
           <Route path="admin" element={<AdminPrivateRoute />} >
