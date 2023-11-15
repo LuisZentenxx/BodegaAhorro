@@ -18,9 +18,9 @@ export interface Product {
 }
   
   export interface User{
-    id?: number
-    email?: string
-    name: string
+    id?: number;
+    email: string;
+    name: string;
     avatar: File | null;
   }
 

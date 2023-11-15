@@ -7,12 +7,14 @@ import toast from "react-hot-toast";
 import { edit_user } from "../api/users";
 
 const UserProfile = () => {
+
+    const [show, setShow] = useState(true);
     const [stateName, setStateName] = useState<string>("");
     const [image, setImage] = useState<File | null>(null);
     const [filePreview, setFilePreview] = useState<string>("");
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [isHovered, setIsHovered] = useState(false);
-    const [show, setShow] = useState(true);
+    
 
     const token: string = useAuthStore.getState().access;
     const tokenDecoded: Token = jwt_decode(token);
@@ -34,20 +36,21 @@ const UserProfile = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["users"] });
             toast.success("Perfil actualizado con éxito!");
-            setShow(false);
+            setShow(true);
         },
         onError: (error) => {
             toast.error("Error");
-            console.log(error);
-            setShow(false);
+            console.log(error)
+            setShow(true);
         },
     });
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         editProfileMut.mutate({
-            name: name,
+            name: stateName,
             avatar: image,
+            email: email,
         });
     };
 
@@ -112,6 +115,8 @@ const UserProfile = () => {
                                 </label>
                                 <input
                                     type="text"
+                                    value={stateName}
+                                    onChange={(e) => setStateName(e.target.value)}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Escribe tu nuevo nombre"
                                 />

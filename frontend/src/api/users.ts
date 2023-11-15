@@ -1,6 +1,18 @@
 import { User } from "../Interfaces";
 import { authAxios, axi } from "./useAxios";
 
+// Realiza una solicitud PUT para editar un producto en el servidor, utilizando los datos proporcionados, incluida una imagen si está presente.
+export const edit_user = async (data: User) => {
+  const formData = new FormData();
+  formData.append("name", data.name);
+  formData.append("email", data.email);
+  if (data.avatar) {
+    formData.append("avatar", data.avatar);
+  }
+  await authAxios.put(`/users/edit/${data.email}/`, formData);
+
+};
+
 export const delete_user = async (id: number) => {
   await authAxios.delete(`/users/delete/${id}/`) 
 };
@@ -28,19 +40,3 @@ export const getUsersRequest = async ({ pageParam = 1 }) => {
   const response = await authAxios.get(`/users/users/?page=${pageParam}&pages=10`);
   return response.data;
 }
-
-// Realiza una solicitud PUT para editar un producto en el servidor, utilizando los datos proporcionados, incluida una imagen si está presente.
-export const edit_user = async (data: User) => {
-  try {
-    const formData = new FormData();
-    formData.append("name", data.name);
-    if (data.avatar) {
-      formData.append("avatar", data.avatar);
-    }
-    await authAxios.put(`/users/edit/${data.email}/`, formData);
-  } catch (error) {
-    console.error("Error al editar el producto:", error);
-    // Lanzar una excepción o manejar el error según sea necesario
-    throw new Error("Ocurrió un error al editar el producto");
-  }
-};
