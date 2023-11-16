@@ -3,6 +3,7 @@ from .models import Order, Orderitem
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
+    product = serializers.ReadOnlyField(source='product.name')
     class Meta:
         model = Orderitem
         fields = '__all__'
