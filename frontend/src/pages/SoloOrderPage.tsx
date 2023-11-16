@@ -41,6 +41,10 @@ const SoloOrderPage = () => {
                         <th scope="col" className="px-4 py-3">
                             Método de Pago
                         </th>
+
+                        <th scope="col" className="px-4 py-3">
+                            Estado de Órden
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,6 +66,15 @@ const SoloOrderPage = () => {
 
                         <td className="px-4 py-3">
                             PayPal
+                        </td>
+
+                        <td className="px-4 py-3">
+                            {data.is_delivered === false ? (
+                                <p>No entregado</p>
+                            ): (
+                                <p>Entregado</p>
+                            )
+                            }
                         </td>
                     </tr>
                 </tbody>
