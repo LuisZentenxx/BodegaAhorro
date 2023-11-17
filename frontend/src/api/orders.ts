@@ -1,8 +1,13 @@
 import { authAxios } from "./useAxios";
 import { Order } from "../Interfaces";
 
+export const search_order = async (query: string) => {
+    const response = await authAxios.get(`/orders/search/?query=${query}`);
+    return response.data;
+  };
+  
 export const edit_order = async (id: number) => {
-    await authAxios.put(`/orders/deliver/${id}`)
+    await authAxios.put(`/orders/deliver/${id}/`)
 }
 
 export const get_orders = async () =>{

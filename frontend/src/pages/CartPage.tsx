@@ -4,7 +4,8 @@ import { create_order } from "../api/orders"
 import toast from "react-hot-toast"
 import { useNavigate } from "react-router-dom"
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { useState } from "react"
+
+
 
 const CartPage = () => {
 
@@ -13,10 +14,6 @@ const CartPage = () => {
     const removeAll = useCartStore(state => state.removeAll)
     const cart = useCartStore(state => state.cart);
     const total_price = useCartStore(state => state.totalPrice);
-
-    const [address, setAddress] = useState<string>("")
-    const [commune, setCommune] = useState<string>("")
-    const [city, setCity] = useState<string>("")
 
     const navigate = useNavigate();
     const queryClient = useQueryClient();
@@ -36,7 +33,7 @@ const CartPage = () => {
         },
     });
 
-    const createOrder = (data: any, actions: any) => {
+    const createOrder = (data : any, actions : any) => {
         console.log(data)
         return actions.order.create({
             purchase_units: [
@@ -52,7 +49,7 @@ const CartPage = () => {
         });
     };
 
-    const onApprove = (data: any, actions: any) => {
+    const onApprove = (data : any, actions: any) => {
         console.log(data)
         return actions.order.capture(handleSubmit());
     };
@@ -62,19 +59,16 @@ const CartPage = () => {
         createOrderMut.mutate({
             order_items: cart,
             total_price: total_price,
-            address: address,
-            city: city,
-            commune: commune,
         });
     };
 
-    return (
+    return (        
         <>
             <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
                 <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                     <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
 
-
+                    
                         <div className="relative mt-5 overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
                             <div className="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
                                 <div className="flex items-center flex-1 space-x-4">
@@ -113,7 +107,7 @@ const CartPage = () => {
                                                             {product.category}
                                                         </span>
                                                     </td>
-
+                                                    
                                                     <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                         <div className="flex items-center space-x-3">
                                                             <button
@@ -139,7 +133,7 @@ const CartPage = () => {
                                                     <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                         ${product.quantity !== undefined ? product.price * product.quantity : 0}
                                                     </td>
-
+                                            
                                                 </tr>
                                             </>
                                         ))}
@@ -149,36 +143,13 @@ const CartPage = () => {
                             </div>
                         </div>
                     </div>
+                    
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                            Datos de Envío
+                            Realizar Pago
                         </h1>
                         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-
-                            <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dirección</label>
-                                <input
-                                    onChange={(e) => setAddress(e.target.value)}
-                                    value={address}
-                                    type="text" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ej: Calle El Sol 123" />
-                            </div>
-
-                            <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comuna</label>
-                                <input
-                                    onChange={(e) => setCommune(e.target.value)}
-                                    value={commune}
-                                    type="text" placeholder="Ej: Villa Alemana" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                            </div>
-
-                            <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ciudad</label>
-                                <input
-                                    onChange={(e) => setCity(e.target.value)}
-                                    value={city}
-                                    type="text" placeholder="Ej: Valparaíso" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                            </div>
-                            <div className="ml-[180px]">
+                        <div className="ml-[180px]">
                             <PayPalScriptProvider 
                                 options={{ 
                                     clientId: "AWZ1kdhaJoKJ4ovzV9LRfdL09u7lpOX0T717nBulDED7bGHt2UdunvwNvoVHVzk6nShdpcUeKRF2mf31",

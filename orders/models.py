@@ -16,9 +16,3 @@ class Orderitem(models.Model):
     email = models.CharField(max_length=250, blank=True)
     quantity = models.IntegerField(null=True, blank=True, default=0)
     price = models.CharField(max_length=250, blank=True)
-
-class ShippingAddress(models.Model):
-    order = models.OneToOneField(Order, on_delete=models.CASCADE, null=True, blank=True)
-    address = models.CharField(max_length=250, blank=True)
-    city = models.CharField(max_length=100, blank=True)
-    commune = models.CharField(max_length=100, blank=True)

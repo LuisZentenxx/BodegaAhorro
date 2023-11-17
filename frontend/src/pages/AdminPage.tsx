@@ -6,6 +6,7 @@ import { search_prod } from "../api/products"
 import { search_users } from "../api/users"
 
 import { useQuery } from "@tanstack/react-query"
+import { search_order } from "../api/orders"
 
 const AdminPage = () => {
 
@@ -32,6 +33,15 @@ const AdminPage = () => {
     }
 })
 
+const { data: orders } = useQuery({
+    queryKey: ['orders', search],
+    queryFn: () => {
+        if (search && show === 1) {
+            return search_order(search)
+        }
+        return { orders: [] }
+    }
+})
   return (
 <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
     <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -83,7 +93,7 @@ const AdminPage = () => {
                     </div>
             </div>
           {show === 0 && <Products results={data}/>}
-          {show === 1 && <Orders/>}
+          {show === 1 && <Orders results={orders}/>}
           {show === 2 && <Users results={users}/>}
        
         </div>

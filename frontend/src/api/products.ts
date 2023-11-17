@@ -7,6 +7,9 @@ import { authAxios, axi } from "./useAxios";
   @authAxios : Realiza solicitudes HTTP a rutas específicas para realizar operaciones en productos y categorías.
 */ 
 
+export const create_review = async (description : string, rating : number, productId : number) => {
+  await authAxios.post(`/products/review/${productId}/`)
+};
 // Devuelve las categorías de los productos
 export const cate_api = async (category: string) => {
   const response = await authAxios.get(`/products/cate/${category}/`);

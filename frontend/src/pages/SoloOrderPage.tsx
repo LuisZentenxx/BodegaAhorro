@@ -45,9 +45,6 @@ const SoloOrderPage = () => {
                         <th scope="col" className="px-4 py-3">
                             Fecha Entrega
                         </th>
-                        <th scope="col" className="px-4 py-3">
-                            Dirección
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,29 +61,29 @@ const SoloOrderPage = () => {
                         </td>
 
                         <td className="px-4 py-3">
-                            {data.created_at.slice(0, 10)}
+                        {data && data.created_at !== null &&
+                                <>
+                                    {data.created_at.slice(0, 10)}
+                                </>
+                            }
                         </td>
 
 
                         <td className="px-4 py-3">
                             {data.is_delivered === false ? (
-                                <p>No entregado</p>
+                                <p>No Recibido</p>
                             ) : (
-                                <p>Entregado</p>
+                                <p>Recibido</p>
                             )
                             }
                         </td>
 
                         <td className="px-4 py-3">
-                            {data && data.delivered_at !== null &&
+                            {data && data.delivered_at !== undefined &&
                                 <>
                                     {data.delivered_at.slice(0, 10)}
                                 </>
                             }
-                        </td>
-
-                        <td className="px-4 py-3">
-                            {data.shipping_address.address}  {data.shipping_address.commune}
                         </td>
                     </tr>
                 </tbody>

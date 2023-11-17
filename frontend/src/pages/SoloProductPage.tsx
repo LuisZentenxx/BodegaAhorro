@@ -3,6 +3,7 @@ import Loader from "../components/Loader"
 import { get_solo } from "../api/products"
 import { useParams } from "react-router-dom"
 import toast from "react-hot-toast"
+import Reviews from "../components/Reviews"
 
 const SoloProductPage = () => {
 
@@ -43,6 +44,7 @@ const SoloProductPage = () => {
                     <img className="w-full"
                         src={`${import.meta.env.VITE_BACKEND_URL}${data.image}`} />
                 </div>
+                <Reviews/>
             </div>
 
         </>
