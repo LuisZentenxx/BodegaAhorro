@@ -35,15 +35,18 @@ const SoloOrderPage = () => {
                         </th>
 
                         <th scope="col" className="px-4 py-3">
-                            Fecha de Compra
+                            Fecha Compra
                         </th>
 
                         <th scope="col" className="px-4 py-3">
-                            Método de Pago
+                            Estado Orden
                         </th>
 
                         <th scope="col" className="px-4 py-3">
-                            Estado de Órden
+                            Fecha Entrega
+                        </th>
+                        <th scope="col" className="px-4 py-3">
+                            Dirección
                         </th>
                     </tr>
                 </thead>
@@ -64,17 +67,26 @@ const SoloOrderPage = () => {
                             {data.created_at.slice(0, 10)}
                         </td>
 
-                        <td className="px-4 py-3">
-                            PayPal
-                        </td>
 
                         <td className="px-4 py-3">
                             {data.is_delivered === false ? (
                                 <p>No entregado</p>
-                            ): (
+                            ) : (
                                 <p>Entregado</p>
                             )
                             }
+                        </td>
+
+                        <td className="px-4 py-3">
+                            {data && data.delivered_at !== null &&
+                                <>
+                                    {data.delivered_at.slice(0, 10)}
+                                </>
+                            }
+                        </td>
+
+                        <td className="px-4 py-3">
+                            {data.shipping_address.address}  {data.shipping_address.commune}
                         </td>
                     </tr>
                 </tbody>
@@ -87,6 +99,7 @@ const SoloOrderPage = () => {
                         <th scope="col" className="px-4 py-3">
                             ID Producto
                         </th>
+
                         <th scope="col" className="px-4 py-3">
                             Cantidad
                         </th>

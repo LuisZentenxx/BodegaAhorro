@@ -22,7 +22,6 @@ const AdminPage = () => {
       }
   })
 
-
   const { data: users } = useQuery({
     queryKey: ['users', search],
     queryFn: () => {

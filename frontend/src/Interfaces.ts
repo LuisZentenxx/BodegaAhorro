@@ -16,6 +16,9 @@ export interface Order {
   id?: number;
   total_price: number;
   order_items: Product[];
+  address: string;
+  city: string;
+  commune : string;
 }
 
 export interface User {
