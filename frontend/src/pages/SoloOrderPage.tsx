@@ -61,16 +61,16 @@ const SoloOrderPage = () => {
                         </td>
 
                         <td className="px-4 py-3">
-                        {data && data.created_at !== null &&
+                        {data && data.created_at !== undefined || null && (
                                 <>
                                     {data.created_at.slice(0, 10)}
                                 </>
-                            }
+                            )}
                         </td>
 
 
                         <td className="px-4 py-3">
-                            {data.is_delivered === false ? (
+                            {data.is_delivered === false || null ? (
                                 <p>No Recibido</p>
                             ) : (
                                 <p>Recibido</p>
@@ -79,11 +79,11 @@ const SoloOrderPage = () => {
                         </td>
 
                         <td className="px-4 py-3">
-                            {data && data.delivered_at !== undefined &&
+                            {data && data.delivered_at !== undefined || null && (
                                 <>
                                     {data.delivered_at.slice(0, 10)}
                                 </>
-                            }
+                            )}
                         </td>
                     </tr>
                 </tbody>

@@ -24,9 +24,9 @@ const UserProfile = () => {
     const tokenDecoded: Token = jwt_decode(token);
     const id = tokenDecoded.user_id
 
-    const { data : user } = useQuery({
+    const { data: user } = useQuery({
         queryKey: ['user', id],
-        queryFn: () =>  get_solo_user(id)
+        queryFn: () => get_solo_user(id)
     })
 
     useEffect(() => {
@@ -104,11 +104,13 @@ const UserProfile = () => {
                 {show ? (
                     <>
                         <div className="flex flex-col items-center pb-10">
-                            <img
-                                className="w-24 h-24 mb-3 mt-3 rounded-full shadow-lg"
-                                src={`${import.meta.env.VITE_BACKEND_URL}${user.avatar}`}
-                                alt="Bonnie image"
-                            />
+                            {user && user.avatar !== undefined &&
+                                <img
+                                    className="w-24 h-24 mb-3 mt-3 rounded-full shadow-lg"
+                                    src={`${import.meta.env.VITE_BACKEND_URL}${user.avatar}`}
+                                    alt="Bonnie image"
+                                />
+                            }
                             <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
                                 {user.name}
                             </h5>
@@ -133,17 +135,17 @@ const UserProfile = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data && data.map((order : Order) => (
-                                           <tr className="border-b dark:border-gray-700">
-                                           <th scope="row" className="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                               {order.id}
-                                           </th>
-                                           <td className="px-4 py-3">
-                                            <Link className="p-2 cursor-pointer rounded-lg bg-gray-900 hover:bg-gray-700" to={`/order/${order.id}/`} >
-                                             Ver Orden
-                                            </Link>
+                                    {data && data.map((order: Order) => (
+                                        <tr className="border-b dark:border-gray-700">
+                                            <th scope="row" className="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {order.id}
+                                            </th>
+                                            <td className="px-4 py-3">
+                                                <Link className="p-2 cursor-pointer rounded-lg bg-gray-900 hover:bg-gray-700" to={`/order/${order.id}/`} >
+                                                    Ver Orden
+                                                </Link>
                                             </td>
-                                       </tr>
+                                        </tr>
                                     ))}
                                 </tbody>
                             </table>
