@@ -44,7 +44,7 @@ const SoloProductPage = () => {
                     <img className="w-full"
                         src={`${import.meta.env.VITE_BACKEND_URL}${data.image}`} />
                 </div>
-                <Reviews/>
+                <Reviews productId={data.id}/>
             </div>
 
         </>
