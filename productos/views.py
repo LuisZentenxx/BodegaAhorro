@@ -1,10 +1,10 @@
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status, generics
 from django.utils.text import slugify
 
-from . models import Producto, Reviews
+from . models import Producto
 from . serializers import ProductSerializer, ReviewSerializer
 from backend.pagination import CustomPagination
 from .permissions import IsOwnerOrReadOnly
@@ -23,6 +23,18 @@ def search(request):
     products = Producto.objects.filter(name__icontains=query)
     serializer = ProductSerializer(products, many=True)
     return Response({'products' : serializer.data})
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_review(request, pk):
+    serializer = ReviewSerializer(data= request.data)
+    product = Producto.objects.get(pk=pk)
+    if serializer.is_valid():
+        serializer.save(user=request.user, product=product)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    else:
+        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+
 
 #Obtener todos los productos
 @api_view(['GET'])
@@ -94,15 +106,3 @@ def delete_product(request, pk):
     else:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
     
-class ReviewList(generics.ListCreateAPIView):
-    queryset = Reviews.objects.all()
-    serializer_class = ReviewSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
-
-class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Reviews.objects.all()
-    serializer_class = ReviewSerializer
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]

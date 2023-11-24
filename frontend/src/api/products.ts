@@ -8,7 +8,7 @@ import { authAxios, axi } from "./useAxios";
 */ 
 
 export const create_review = async (description : string, rating : number, productId : number) => {
-  await authAxios.post(`/products/review/${productId}/`)
+  await authAxios.post(`/products/review/${productId}/`, {description, rating})
 };
 // Devuelve las categorías de los productos
 export const cate_api = async (category: string) => {
