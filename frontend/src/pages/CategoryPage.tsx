@@ -9,6 +9,7 @@ const CategoryPage  = () => {
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-5">
                         <Link to={`/cate/Abarrotes`}>
+                            <img src="media\carro.png" alt="" />
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Abarrotes
                             </h5>
@@ -25,6 +26,7 @@ const CategoryPage  = () => {
                         </Link>
                     </div>
                 </div>
+                
 
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-5">

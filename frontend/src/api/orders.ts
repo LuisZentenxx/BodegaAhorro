@@ -16,8 +16,8 @@ export const get_orders = async () =>{
 }
 
 export const solo_order = async (id: number) =>{
-    const Response = await authAxios.get(`/orders/solo/${id}/`);
-    return Response.data
+    const response = await authAxios.get(`/orders/solo/${id}/`);
+    return response.data
 }
 export const my_orders = async () => {
     const Response = await authAxios.get('orders/my/orders')

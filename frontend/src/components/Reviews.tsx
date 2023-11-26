@@ -139,22 +139,22 @@ const Reviews = ({ productId, reviews }: Props) => {
             </section>
     
             {reviews && reviews.map((r: any) => (
-                <article className="w-4/5 mx-auto bg-white dark:bg-gray-800 p-6 my-8 rounded-md shadow-md">
+                <article className="w-4/5 mx-auto bg-slate-200 dark:bg-gray-800 p-6 my-8 rounded-md shadow-md">
                     <div className="flex items-center mb-4 space-x-4">
                     <img 
                     className="w-10 h-10 rounded-full" 
                     src={`${import.meta.env.VITE_BACKEND_URL}${r.avatar}`}
                     alt="" />
-                    <div className="space-y-1 font-medium dark:text-white">
+                    <div className="space-y-1 font-semibold text-slate-800 dark:text-white">
                         <p>{r.user}</p>
                     </div>
                 </div>
                 <Rating value={r.rating}/>
-                <footer className="mb-5 text-sm text-gray-500 dark:text-gray-400">
+                <footer className="mb-5 text-sm text-slate-800 dark:text-gray-400">
                     <p>{r.created.slice(0,10)}</p>
                 </footer>
                 <p 
-                className="mb-2 text-gray-500 dark:text-gray-400">
+                className="mb-2 text-slate-800 dark:text-gray-200">
                     {r.description}
                 </p>
                 </article>

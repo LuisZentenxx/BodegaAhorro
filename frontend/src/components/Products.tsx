@@ -220,6 +220,8 @@ const Products = ({ results }: Props) => {
                 )}
             </table>
         </div>
+
+
     );
 };
 export default Products;

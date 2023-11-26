@@ -145,11 +145,11 @@ const CartPage = () => {
                     </div>
                     
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                        <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-slate-800 md:text-2xl dark:text-white">
                             Realizar Pago
                         </h1>
                         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-                        <div className="ml-[180px]">
+                        <div className="md:ml-[10px] lg:ml-[200px]">
                             <PayPalScriptProvider 
                                 options={{ 
                                     clientId: "AWZ1kdhaJoKJ4ovzV9LRfdL09u7lpOX0T717nBulDED7bGHt2UdunvwNvoVHVzk6nShdpcUeKRF2mf31",
@@ -158,7 +158,7 @@ const CartPage = () => {
                                 <PayPalButtons
                                 createOrder={(data, actions) => createOrder(data, actions)}
                                 onApprove={(data, actions) => onApprove(data, actions)}
-                                style={{ layout: "horizontal" }} />
+                                style={{ layout: "horizontal", color: "blue", label: "pay", shape: "pill", tagline: false}} />
                             </PayPalScriptProvider>
                         </div>
                         </form>

@@ -92,7 +92,7 @@ const Users = ({ results }: Props) => {
                                                 }
                                             }
                                             size={22}
-                                            className="text-red-300 cursor-pointer"
+                                            className="text-red-500 cursor-pointer"
                                         />
                                     </td>
                                 </tr>
