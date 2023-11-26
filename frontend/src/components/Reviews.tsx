@@ -9,6 +9,7 @@ interface Props {
     productId: number;
     reviews: [];
 }
+
 const Reviews = ({ productId, reviews }: Props) => {
 
     const [description, setDescription] = useState("")
@@ -39,7 +40,7 @@ const Reviews = ({ productId, reviews }: Props) => {
         <>
             {show &&
                 <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-                    <div className="bg-white w-96 p-6 rounded-md shadow-md">
+                    <div className="bg-black  w-90 p-6 rounded-md shadow-md">
                         <div className="flex justify-end">
                             <button
                                 onClick={() => setShow(false)}
@@ -121,16 +122,16 @@ const Reviews = ({ productId, reviews }: Props) => {
                 </div>
             }
     
-            <section className="bg-white dark:bg-gray-900">
+            <section className="bg-slate-200 dark:bg-gray-900">
                 <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
                     <div className="mx-auto max-w-screen-sm">
-                        <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-primary-700 dark:text-white">¡Panel de Opiniones!</h2>
-                        <p className="mb-8 font-light text-gray-600 lg:mb-16 sm:text-xl dark:text-gray-400">
+                        <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-red-800 dark:text-white">¡Panel de Opiniones!</h2>
+                        <p className="mb-8 font-light font-semibold text-gray-600 lg:mb-16 sm:text-xl dark:text-gray-400">
                             Explora las opiniones de nuestros clientes.
                         </p>
                         <button
                             onClick={() => setShow(true)}
-                            className="inline-flex items-center px-4 py-2 text-sm font-semibold text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-2 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            className="inline-flex items-center px-4 py-2 text-sm font-semibold text-center text-white bg-red-800 rounded-lg hover:bg-red-700 focus:ring-2 focus:outline-none focus:ring-primary-300 dark:bg-gray-200 dark:text-slate-800 dark:hover:bg-slate-300 dark:focus:ring-primary-800">
                             ¡Agrega una Opinión Ahora!
                         </button>
                     </div>
@@ -138,7 +139,7 @@ const Reviews = ({ productId, reviews }: Props) => {
             </section>
     
             {reviews && reviews.map((r: any) => (
-                <article className="container mx-auto bg-white dark:bg-gray-800 p-6 my-8 rounded-md shadow-md">
+                <article className="w-4/5 mx-auto bg-white dark:bg-gray-800 p-6 my-8 rounded-md shadow-md">
                     <div className="flex items-center mb-4 space-x-4">
                     <img 
                     className="w-10 h-10 rounded-full" 

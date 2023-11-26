@@ -10,12 +10,12 @@ interface Props {
 }
 const Users = ({ results }: Props) => {
 
+    const queryClient = useQueryClient();
+
     const { data, isError, isLoading } = useQuery({
         queryKey: ["users"],
         queryFn: get_users,
     });
-
-    const queryClient = useQueryClient();
 
     const deleteUserMut = useMutation({
         mutationFn: delete_user,
@@ -73,35 +73,32 @@ const Users = ({ results }: Props) => {
                 ) : (
 
                     <tbody>
-                        {data && data.map((user: User) => (
-                            <tr className="border-b dark:border-gray-700">
+                        {data &&
+                            data.map((user: User) => (
+                                <tr className="border-b dark:border-gray-700">
 
-                                <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {user.id}
-                                </th>
+                                    <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {user.id}
+                                    </th>
 
-                                <td className="px-4 py-3">{user.email}</td>
+                                    <td className="px-4 py-3">{user.email}</td>
 
-                                <td className="px-4 py-3">{user.name}</td>
-                                <td className="px-4 py-3 flex items-center justify-center gap-4">
-                                    <BsFillTrashFill
-                                        onClick={() => {
-                                            if (user.id) {
-                                                deleteUserMut.mutate(user.id)
+                                    <td className="px-4 py-3">{user.name}</td>
+                                    <td className="px-4 py-3 flex items-center justify-center gap-4">
+                                        <BsFillTrashFill
+                                            onClick={() => {
+                                                if (user.id) {
+                                                    deleteUserMut.mutate(user.id)}
+                                                }
                                             }
-                                        }
-                                        }
-
-                                        size={22}
-                                        className="text-red-300 cursor-pointer" />
-                                </td>
-                            </tr>
-                        ))}
+                                            size={22}
+                                            className="text-red-300 cursor-pointer"
+                                        />
+                                    </td>
+                                </tr>
+                            ))}
                     </tbody>
-
                 )}
-
-
             </table>
         </div>
     )

@@ -22,14 +22,15 @@ const SoloOrderPage = () => {
     if (isLoading) return <Loader />
 
     return (
-        <div className="overflow-x-auto container mx-auto px-5 pt-11">
-            <h1 className="w-full text-xl text-center text-white-500 dark:text-gray-100 mb-5">Compra</h1>
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <div className="overflow-x-auto w-4/5 mx-auto px-5 pt-11">
+            <h1 className="w-full text-xl text-center text-slate-800 dark:text-gray-100 mb-5 font-bold">Compra</h1>
+            <table className="w-full text-sm text-left bg-slate-200 dark:text-slate-800 font-semibold">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
                     <tr>
                         <th scope="col" className="px-4 py-3">
                             ID Compra
                         </th>
+                        
                         <th scope="col" className="px-4 py-3">
                             Precio Total
                         </th>
@@ -51,7 +52,7 @@ const SoloOrderPage = () => {
                     <tr className="border-b dark:border-gray-700">
                         <th
                             scope="row"
-                            className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                            className="px-4 py-3 whitespace-nowrap"
                         >
                             {data.id}
                         </th>
@@ -89,9 +90,9 @@ const SoloOrderPage = () => {
                 </tbody>
             </table>
 
-            <h1 className="w-full text-xl text-center text-white-500 dark:text-gray-100 mt-10 mb-5">Detalle de Productos</h1>
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <h1 className="w-full text-xl text-center font-bold text-slate-800 dark:text-gray-100 mt-10 mb-5">Detalle de Productos</h1>
+            <table className="w-full text-sm text-left bg-slate-200 text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-200">
                     <tr>
                         <th scope="col" className="px-4 py-3">
                             ID Producto
@@ -112,23 +113,24 @@ const SoloOrderPage = () => {
                 </thead>
 
                 <tbody>
-                    {data.order_items && data.order_items.map((p: any) => (<tr className="border-b dark:border-gray-700">
-                        <th
+                    {data.order_items && data.order_items.map((p: any) => (
+                    <tr className="border-b dark:border-gray-700">
+                        <td
                             scope="row"
-                            className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                            className="px-4 py-3 font-semibold text-slate-700 whitespace-nowrap dark:text-slate-800"
                         >
-                            {p.product}
-                        </th>
+                            {p.id}
+                        </td>
 
-                        <td className="px-4 py-3">
+                        <td className="px-4 py-3 text-slate-800 font-semibold">
                             {p.quantity}
                         </td>
 
-                        <td className="px-4 py-3">
+                        <td className="px-4 py-3 font-semibold text-slate-800">
                             $ {p.price}
                         </td>
 
-                        <td className="px-4 py-3">
+                        <td className="px-4 py-3 font-semibold text-slate-800">
                             $ {p.price * p.quantity}
                         </td>
                     </tr>

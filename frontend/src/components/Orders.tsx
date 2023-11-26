@@ -135,26 +135,26 @@ const Orders = ({ results }: Props) => {
                                     </label>
                                 </div>
                             </td>
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <th scope="row" className="px-6 py-4 font-semibold text-gray-900 whitespace-nowrap dark:text-white">
                                 {o.id}
                             </th>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-4 font-semibold text-slate-600 dark:text-gray-200">
                                 {o.created_at.slice(0, 10)}
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-4 font-semibold text-slate-600 dark:text-gray-200">
                                 {o.delivered_at !== null &&
                                     <>
                                         {o.delivered_at.slice(0, 10)}
                                     </>
                                 }
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-4 font-semibold text-slate-600 dark:text-blue-200">
                                 {o.user}
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-4 font-semibold text-green-800 dark:text-green-300">
                                 $ {o.total_price}
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300 hover:font-bold">
                                 <Link
                                     to={`/order/${o.id}`}
                                 >

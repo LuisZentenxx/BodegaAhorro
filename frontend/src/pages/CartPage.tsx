@@ -64,7 +64,7 @@ const CartPage = () => {
 
     return (        
         <>
-            <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
+            <section className="bg-gray-300 dark:bg-gray-900 p-3 sm:p-5">
                 <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                     <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
 
@@ -86,7 +86,7 @@ const CartPage = () => {
                                             <th scope="col" className="px-4 py-3">Producto</th>
                                             <th scope="col" className="px-4 py-3">Categoría</th>
                                             <th scope="col" className="px-4 py-3">Cantidad</th>
-                                            <th scope="col" className="px-4 py-3">Precio</th>
+                                            <th scope="col" className="px-4 py-3">Precio Unitario</th>
                                             <th scope="col" className="px-4 py-3">Total</th>
                                         </tr>
                                     </thead>
@@ -130,7 +130,7 @@ const CartPage = () => {
                                                     </td>
                                                     <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">${product.price}</td>
 
-                                                    <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    <td className="px-4 py-2 font-semibold text-gray-900 whitespace-nowrap dark:text-white">
                                                         ${product.quantity !== undefined ? product.price * product.quantity : 0}
                                                     </td>
                                             

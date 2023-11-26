@@ -7,10 +7,6 @@ const CategoryPage  = () => {
             <div className="p-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-16">
 
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link 
-                        to={`/cate/OS`}>
-                    </Link>
-
                     <div className="p-5">
                         <Link to={`/cate/Abarrotes`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -21,10 +17,6 @@ const CategoryPage  = () => {
                 </div>
 
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link 
-                        to={`/cate/OS`}>
-                    </Link>
-
                     <div className="p-5">
                         <Link to={`/cate/Pastas`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -35,10 +27,6 @@ const CategoryPage  = () => {
                 </div>
 
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link 
-                        to={`/cate/Lang`}>
-                    </Link>
-
                     <div className="p-5">
                         <Link to={`/cate/Bebidas`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -47,6 +35,37 @@ const CategoryPage  = () => {
                         </Link>
                     </div>
                 </div>
+
+                <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div className="p-5">
+                        <Link to={`/cate/Lacteos`}>
+                            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                Lacteos
+                            </h5>
+                        </Link>
+                    </div>
+                </div>
+
+                <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div className="p-5">
+                        <Link to={`/cate/Carnes`}>
+                            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                Carnes
+                            </h5>
+                        </Link>
+                    </div>
+                </div>
+
+                <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div className="p-5">
+                        <Link to={`/cate/Refinados`}>
+                            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                Aceites, Sal y Azucares
+                            </h5>
+                        </Link>
+                    </div>
+                </div>
+
             </div>
         </div>
     )

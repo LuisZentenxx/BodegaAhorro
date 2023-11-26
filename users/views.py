@@ -65,7 +65,7 @@ def get_users(request):
         users = User.objects.exclude(email="admin@admin.com")
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
-    return Response(status=status.HTTP_401_UNAUTHORIZED)
+    return Response(serializer.data, status=status.HTTP_401_UNAUTHORIZED)
 
 
 @api_view(["POST"])

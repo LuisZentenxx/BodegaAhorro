@@ -56,7 +56,7 @@ const Products = ({ results }: Props) => {
     return (
         <div className="overflow-x-auto">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="px-4 py-3">
                             ID Producto
@@ -81,7 +81,7 @@ const Products = ({ results }: Props) => {
                             <Link to="add">
                                 <AiFillPlusSquare
                                     size={22}
-                                    className="text-green-500 cursor-pointer"
+                                    className="text-green-700 dark:text-green-400 cursor-pointer"
                                 />
                             </Link>
                         </th>
@@ -127,13 +127,13 @@ const Products = ({ results }: Props) => {
                                                         }
                                                     }}
                                                     size={22}
-                                                    className="text-red-300 cursor-pointer"
+                                                    className="dark:text-red-800 cursor-pointer"
                                                 />
 
                                                 <Link to={`edit/${product.id}`}>
                                                     <AiFillEdit
                                                         size={22}
-                                                        className="text-white cursor-pointer"
+                                                        className="text-yellow-600 cursor-pointer"
                                                     />
                                                 </Link>
                                             </div>
@@ -148,7 +148,7 @@ const Products = ({ results }: Props) => {
                             <>
                                 <tbody key={page.meta.next}>
                                     {page.data.map((product: Product) => (
-                                        <tr className="border-b dark:border-gray-700">
+                                        <tr className=" bg-gray-100 dark:bg-gray-800 border-b dark:border-gray-700">
                                             <th
                                                 scope="row"
                                                 className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -156,15 +156,15 @@ const Products = ({ results }: Props) => {
                                                 {product.id}
                                             </th>
 
-                                            <td className="px-4 py-3">
+                                            <td className="px-4 py-3 font-semibold text-slate-800 dark:text-gray-200">
                                                 {product.name}
                                             </td>
 
-                                            <td className="px-4 py-3">
+                                            <td className="px-4 py-3 text-green-600 font-semibold dark:text-green-300">
                                                 $ {product.price}
                                             </td>
 
-                                            <td className="px-4 py-3">
+                                            <td className="px-4 py-3 font-semibold text-slate-800 dark:text-gray-200">
                                                 {product.count_in_stock}
                                             </td>
 
@@ -182,7 +182,7 @@ const Products = ({ results }: Props) => {
                                                             }
                                                         }}
                                                         size={22}
-                                                        className="text-red-300 cursor-pointer"
+                                                        className="text-red-600 dark:text-red-400 cursor-pointer"
                                                     />
 
                                                     <Link
@@ -190,7 +190,7 @@ const Products = ({ results }: Props) => {
                                                     >
                                                         <AiFillEdit
                                                             size={22}
-                                                            className="text-white cursor-pointer"
+                                                            className="text-blue-600 dark:text-gray-100 cursor-pointer"
                                                         />
                                                     </Link>
                                                 </div>

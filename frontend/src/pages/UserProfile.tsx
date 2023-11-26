@@ -100,7 +100,7 @@ const UserProfile = () => {
     return (
 
         <div className="flex justify-center pt-[100px]">
-            <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div className="w-full max-w-sm bg-gray-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 {show ? (
                     <>
                         <div className="flex flex-col items-center pb-10">
@@ -111,23 +111,23 @@ const UserProfile = () => {
                                     alt="Bonnie image"
                                 />
                             }
-                            <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                            <h5 className="mb-1 text-xl font-semibold text-gray-900 dark:text-white">
                                 {user.name}
                             </h5>
-                            <span className="text-sm text-gray-500 dark:text-gray-400">
+                            <span className="text-sm text-gray-700 dark:text-gray-400">
                                 {user.email}
                             </span>
                             <div className="flex mt-4 md:mt-6">
                                 <button
                                     onClick={() => setShow(false)}
-                                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3"
+                                    className="inline-flex items-center px-4 py-2 text-sm font-semibold text-center text-white bg-red-800 border hover:font-bold border-gray-300 rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3"
                                 >
                                     Editar Perfil
                                 </button>
                             </div>
                         </div>
                         <div className="overflow-x-auto">
-                            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <table className="w-full text-sm text-left text-white font-semibold dark:text-gray-400">
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
                                         <th scope="col" className="px-4 py-3">ID Orden</th>
@@ -141,7 +141,7 @@ const UserProfile = () => {
                                                 {order.id}
                                             </th>
                                             <td className="px-4 py-3">
-                                                <Link className="p-2 cursor-pointer rounded-lg bg-gray-900 hover:bg-gray-700" to={`/order/${order.id}/`} >
+                                                <Link className="p-2 cursor-pointer rounded-lg bg-red-800 hover:bg-red-700 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600" to={`/order/${order.id}/`} >
                                                     Ver Orden
                                                 </Link>
                                             </td>

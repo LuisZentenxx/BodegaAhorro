@@ -20,18 +20,18 @@ const Header = () => {
     const { isAuth } = useAuthStore()
     const cart = useCartStore(state => state.cart);
 
-    let is_admin : boolean;
-    let user_id : number;
-
+    let is_admin: boolean;
+    let user_id: number;
+    
     if (isAuth) {
         const tokenDecoded: Token = jwt_decode(token)
-        is_admin = tokenDecoded.is_staff;
-        user_id = tokenDecoded.user_id
+        is_admin = tokenDecoded.is_staff
+        user_id = tokenDecoded.user_id;
     }
 
-    const { data : user } = useQuery({
+    const { data: user } = useQuery({
         queryKey: ['users'],
-        queryFn: () =>  get_solo_user(user_id)
+        queryFn: () => get_solo_user(user_id)
     })
 
     const serSearchTerm = useSearchStore((state) => state.setSearchTerm);
@@ -50,14 +50,14 @@ const Header = () => {
     }
 
     return (
-        <Disclosure as="nav" className="bg-grey dark:bg-gray-800">
+        <Disclosure as="nav" className="bg-red-800 dark:bg-gray-200">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                         <div className="relative flex h-16 items-center justify-between">
                             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
 
-                                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:text-gray-900 dark:text-slate-200 dark:hover:text-slate-50">
+                                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-white dark:text-slate-800">
                                     <span className="sr-only">Open main menu</span>
                                     {open ? (
                                         <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -77,16 +77,25 @@ const Header = () => {
                                         {/* Si está autenticado, muestra el home con las categorías */}
                                         {isAuth ? (
                                             <>
+
+                                                {!is_admin && (
+                                                    <h1 className='text-white font-bold p-2 px-4 rounded-lg dark:text-slate-800 dark:hover:text-white'>
+                                                        BODEGA AHORRO
+                                                    </h1>
+
+                                                )}
+
+                                        
                                                 <Link
                                                     to={'/'}
-                                                    className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                                                    className='p-2 px-4 rounded-lg text-white hover:font-bold dark:text-slate-800'
                                                 >
                                                     Inicio
                                                 </Link>
 
                                                 <Link
                                                     to={'/cate'}
-                                                    className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                                                    className='text-white p-2 px-4 rounded-lg hover:font-bold dark:text-slate-800 dark:hover:text-slate-800'
                                                 >
                                                     Categorías
                                                 </Link>
@@ -94,16 +103,17 @@ const Header = () => {
 
                                         ) : (
                                             <>
+
                                                 <Link
                                                     to={'/login'}
-                                                    className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                                                    className='p-2 px-4 rounded-lg text-white font-semibold hover:font-bold dark:text-slate-800'
                                                 >
                                                     Iniciar Sesión
                                                 </Link>
 
                                                 <Link
                                                     to={'/register'}
-                                                    className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                                                    className='text-white font-semibold p-2 px-4 rounded-lg hover:font-bold dark:text-slate-800 dark:hover:font-bold'
                                                 >
                                                     Registrarse
                                                 </Link>
@@ -114,13 +124,11 @@ const Header = () => {
                                         {is_admin && is_admin && (
                                             <Link
                                                 to={'/admin'}
-                                                className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                                                className='text-slate-800 font-bold p-2 px-4 rounded-lg dark:text-slate-800'
                                             >
                                                 Admin Panel
                                             </Link>
                                         )}
-
-
                                     </div>
                                 </div>
                             </div>
@@ -132,11 +140,11 @@ const Header = () => {
                                     <span className="sr-only">Search icon</span>
                                 </div>
 
-                                
-                                <input 
-                                type="text" 
-                                onChange={handleInputChange}
-                                className="block w-full md:w-[200px] lg:w-[400px] xl:w-[600px] p-2
+
+                                <input
+                                    type="text"
+                                    onChange={handleInputChange}
+                                    className="block w-full md:w-[200px] lg:w-[400px] xl:w-[600px] p-2
                   pl-10 text-sm text-gray-900 border border-gray-300 rounded-full 
                   bg-gray-50 dark:bg-gray-700 outline-none
                   dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
@@ -151,34 +159,34 @@ const Header = () => {
                                 >
                                     {darkMode ?
 
-                                        <BsFillMoonStarsFill size={20} className="text-slate-200 hover:text-white " />
+                                        <BsFillMoonStarsFill size={20} className="text-white dark:text-slate-800" />
 
                                         :
 
-                                        <BsFillSunFill size={23} className="text-slate-900 hover:text-black" />}
+                                        <BsFillSunFill size={23} className="text-white dark:text-slate-800" />}
 
                                 </button>
 
                                 {/* Link al carrito de compras mediante un botón */}
-                                <Link to={'/cart'} className="text-slate-900 hover:text-black dark:text-slate-200 dark:hover:text-white">
+                                <Link to={'/cart'} className="text-white dark:text-slate-800">
                                     <HiOutlineShoppingBag size={23} />
                                 </Link>
 
                                 {/* Estado del carrito de compras, muestra la cantidad de productos */}
-                                <span className="text-slate-900 dark:text-slate-200">{cart.length}</span>
+                                <span className="text-white dark:text-slate-800">{cart.length}</span>
 
                                 {isAuth && (
                                     <Menu as="div" className="relative ml-2">
                                         <div>
                                             <Menu.Button className="flex rounded-full ml-8 text-sm focus:outline-none ">
                                                 <span className="sr-only">Open user menu</span>
-                                                {user && user.avatar !== undefined && 
-                                                <img
-                                                    className="h-8 w-8 rounded-full"
-                                                    src={`${import.meta.env.VITE_BACKEND_URL}${user.avatar}`}
-                                                    alt=""
-                                                />
-}
+                                                {user && user.avatar !== undefined &&
+                                                    <img
+                                                        className="h-8 w-8 rounded-full"
+                                                        src={`${import.meta.env.VITE_BACKEND_URL}${user.avatar}`}
+                                                        alt=""
+                                                    />
+                                                }
                                             </Menu.Button>
                                         </div>
                                         <Transition
@@ -235,7 +243,7 @@ const Header = () => {
                 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full 
                 bg-gray-50 dark:bg-gray-700 outline-none
                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  
-                " placeholder="Buscar..." />
+                " placeholder="Buscar" />
                         </div>
 
                         <div className="space-y-1 px-2 pb-3 pt-2">
@@ -243,14 +251,14 @@ const Header = () => {
                                 <div className="w-full grid grid-cols-1">
                                     <Link
                                         to={'/'}
-                                        className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                                        className='p-2 px-4 rounded-lg text-white hover:font-bold dark:text-slate-800'
                                     >
                                         Inicio
                                     </Link>
 
                                     <Link
                                         to={'/cate'}
-                                        className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                                        className='text-white p-2 px-4 rounded-lg hover:font-bold dark:text-slate-800'
                                     >
                                         Categorías
                                     </Link>
@@ -260,14 +268,14 @@ const Header = () => {
                                 <div className="w-full grid grid-cols-1">
                                     <Link
                                         to={'/login'}
-                                        className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                                        className='p-2 px-4 rounded-lg text-white hover:font-bold dark:text-slate-800'
                                     >
                                         Inicio de Sesión
                                     </Link>
 
                                     <Link
                                         to={'/register'}
-                                        className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                                        className='text-white p-2 px-4 rounded-lg hover:font-bold dark:text-slate-800'
                                     >
                                         Registrarse
                                     </Link>
@@ -278,7 +286,7 @@ const Header = () => {
                                 <div className="w-full">
                                     <Link
                                         to={'/admin'}
-                                        className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                                        className='text-white font-bold p-2 px-4 rounded-lg dark:text-slate-800'
                                     >
                                         Admin Panel
                                     </Link>
