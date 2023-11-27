@@ -75,9 +75,9 @@ const SoloOrderPage = () => {
 
                         <td className="px-4 py-3">
                             {data.is_delivered === false || null ? (
-                                <p>No Recibido</p>
+                                <p>No Entregado</p>
                             ) : (
-                                <p>Recibido</p>
+                                <p>Entregado</p>
                             )
                             }
                         </td>
