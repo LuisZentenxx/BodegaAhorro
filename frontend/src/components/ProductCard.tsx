@@ -8,6 +8,7 @@ interface Props {
 const ProductCard = ({ product }: Props) => {
   const addToCart = useCartStore((state) => state.addToCart);
   return (
+    
     <div>
       <div className="max-w-xs bg-red-800 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <img

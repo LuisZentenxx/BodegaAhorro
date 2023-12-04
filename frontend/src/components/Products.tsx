@@ -1,4 +1,5 @@
 import { BsFillTrashFill } from "react-icons/bs";
+import { BsFillEye, BsFillEyeSlash } from 'react-icons/bs';
 import { AiFillEdit, AiFillPlusSquare } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { deleteProduct, get_products } from "../api/products";
@@ -12,6 +13,7 @@ import Loader from "./Loader";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { Product } from "../Interfaces";
+
 
 interface Props {
     results: any;
@@ -50,8 +52,14 @@ const Products = ({ results }: Props) => {
         },
     });
 
+
+    
+
     if (deleteProdMutation.isLoading) return <Loader />;
     if (error instanceof Error) return <>{toast.error(error.message)}</>;
+
+  
+    
 
     return (
         <div className="overflow-x-auto">
