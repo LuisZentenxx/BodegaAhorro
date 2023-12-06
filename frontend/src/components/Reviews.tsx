@@ -104,19 +104,7 @@ const Reviews = ({ productId, reviews }: Props) => {
                                     type="submit"
                                     className="text-white inline-flex items-center bg-red-800 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-slate-800 dark:hover:bg-slate-600 dark:focus:ring-primary-800"
                                 >
-                                    <svg
-                                        className="mr-1 -ml-1 w-6 h-6"
-                                        fill="currentColor"
-                                        viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                            clipRule="evenodd"
-                                        ></path>
-                                    </svg>
-                                    Agregar nuevo producto
+                                    Publicar opinión
                                 </button>
                             </div>
                         </form>
@@ -125,7 +113,7 @@ const Reviews = ({ productId, reviews }: Props) => {
             }
     
             <section className="bg-slate-200 dark:bg-gray-900">
-                <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
+                <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-0 lg:px-6">
                     <div className="mx-auto max-w-screen-sm">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-red-800 dark:text-white">¡Panel de Opiniones!</h2>
                         <p className="mb-8 font-light font-semibold text-gray-600 lg:mb-16 sm:text-xl dark:text-gray-400">
@@ -142,7 +130,7 @@ const Reviews = ({ productId, reviews }: Props) => {
     
             {reviews && reviews.map((r: any) => (
                 <article className="w-4/5 mx-auto bg-slate-200 dark:bg-gray-800 p-6 my-8 rounded-md shadow-md">
-                    <div className="flex items-center mb-4 space-x-4">
+                    <div className="flex items-center mb-8 space-x-4">
                     <img 
                     className="w-10 h-10 rounded-full" 
                     src={`${import.meta.env.VITE_BACKEND_URL}${r.avatar}`}

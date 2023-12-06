@@ -1,5 +1,4 @@
 import { BsFillTrashFill } from "react-icons/bs";
-import { BsFillEye, BsFillEyeSlash } from 'react-icons/bs';
 import { AiFillEdit, AiFillPlusSquare } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { deleteProduct, get_products } from "../api/products";
@@ -13,6 +12,7 @@ import Loader from "./Loader";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { Product } from "../Interfaces";
+
 
 
 interface Props {
@@ -45,21 +45,23 @@ const Products = ({ results }: Props) => {
         mutationFn: deleteProduct,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["products"] });
-            toast.success("Product deleted!");
+            toast.success("Producto eliminado correctamente!");
+
         },
         onError: () => {
             toast.error("Error!");
         },
     });
 
+ 
 
-    
+
 
     if (deleteProdMutation.isLoading) return <Loader />;
     if (error instanceof Error) return <>{toast.error(error.message)}</>;
 
-  
-    
+
+
 
     return (
         <div className="overflow-x-auto">
@@ -138,6 +140,8 @@ const Products = ({ results }: Props) => {
                                                     className="dark:text-red-800 cursor-pointer"
                                                 />
 
+                                    
+
                                                 <Link to={`edit/${product.id}`}>
                                                     <AiFillEdit
                                                         size={22}
@@ -184,6 +188,7 @@ const Products = ({ results }: Props) => {
                                                                 product.id !==
                                                                 undefined
                                                             ) {
+
                                                                 deleteProdMutation.mutate(
                                                                     product.id
                                                                 );
@@ -192,7 +197,7 @@ const Products = ({ results }: Props) => {
                                                         size={22}
                                                         className="text-red-600 dark:text-red-400 cursor-pointer"
                                                     />
-
+                                                  
                                                     <Link
                                                         to={`edit/${product.id}`}
                                                     >

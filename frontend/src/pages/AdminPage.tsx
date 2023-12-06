@@ -7,7 +7,7 @@ import { search_users } from "../api/users"
 
 import { useQuery } from "@tanstack/react-query"
 import { search_order } from "../api/orders"
-import Stadistics from "../components/Stadistics"
+
 
 const AdminPage = () => {
 
@@ -43,6 +43,8 @@ const AdminPage = () => {
             return { orders: [] }
         }
     })
+
+    
     return (
         <section className="bg-gray-200 dark:bg-gray-900 p-3 sm:p-5">
             <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -85,11 +87,6 @@ const AdminPage = () => {
                                 Usuarios
                             </button>
 
-                            <button
-                                onClick={() => setShow(3)}
-                                type="button" className="flex items-center justify-center text-white font-semibold bg-red-800 hover:font-bold hover:bg-red-700 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-gray-200 dark:text-slate-800 dark:hover:bg-blue-200 focus:outline-none dark:focus:ring-primary-800">
-                                Estadisticas
-                            </button>
 
                         </div>
                     </div>
@@ -98,7 +95,6 @@ const AdminPage = () => {
                     {show === 2 && <Users results={users} />}
                 </div>
             </div>
-                    {show === 3 && <Stadistics/>}
         </section>
         
     )
