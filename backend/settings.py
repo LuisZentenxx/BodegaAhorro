@@ -130,7 +130,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://www.bodegaahorro.xyz/"
+    "https://colorful-pink-python.cyclic.app/"
 ]
 
 AUTH_USER_MODEL = 'users.User'
