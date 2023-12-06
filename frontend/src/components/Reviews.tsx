@@ -84,6 +84,7 @@ const Reviews = ({ productId, reviews }: Props) => {
     
                                 <div className="star-rating text-3xl text-center mt-8">
                                     {[...Array(5)].map((star, index) => {
+                                        console.log(star)
                                         index += 1;
                                         return (
                                             <button

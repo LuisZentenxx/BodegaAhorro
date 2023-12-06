@@ -38,15 +38,8 @@ const SoloOrderPage = () => {
             pdf.setFontSize(16);
             pdf.text("Detalle de Productos", 20, 80);
 
-            const headers = ["Cantidad", "Precio Unitario", "Precio Total"];
-            const rows = data.order_items.map((p: any) => [p.quantity, `$${p.price}`, `$${p.price * p.quantity}`]);
-
-            pdf.autoTable({
-                head: [headers],
-                body: rows,
-                startY: 95,
-                theme: 'striped',
-            });
+          
+           
 
             // Total de la compra
             const totalYPosition = 95 + data.order_items.length * 20 + 10;
