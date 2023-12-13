@@ -15,6 +15,7 @@ import SearchByCatePage from "./pages/SearchByCatePage";
 import CartPage from "./pages/CartPage";
 import UserProfile from "./pages/UserProfile";
 import SoloOrderPage from "./pages/SoloOrderPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
+          <Route path="resetPassword" element={<ForgotPasswordPage />} />
           <Route path="product/:slug" element={<SoloProductPage />} />
           <Route path="cate" element={<CategoryPage />} />
           <Route path="cate/:cate" element={<SearchByCatePage />} />

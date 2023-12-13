@@ -33,6 +33,17 @@ const Reviews = ({ productId, reviews }: Props) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        if (!description.trim()) {
+            toast.error("Por favor, proporciona una descripción.");
+            return;
+        }
+
+        if (rating === 0) {
+            toast.error("Por favor, califica el producto asignando al menos 1 estrella.");
+            return;
+        }
+
         createReviewMut.mutate();
     };
 

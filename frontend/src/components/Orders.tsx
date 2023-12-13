@@ -35,8 +35,8 @@ const Orders = ({ results }: Props) => {
 
 
     return (
-        
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <h1 className="text-center text-3xl dark:text-white font-semibold pb-5 pt-5">Gestión de Órdenes</h1>
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -92,15 +92,16 @@ const Orders = ({ results }: Props) => {
                                         {o.id}
                                     </th>
                                     <td className="px-6 py-4">
-                                        {o.created_at.slice(0, 10)}
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        {o.delivered_at !== null &&
-                                            <>
-                                                {o.delivered_at.slice(0, 10)}
-                                            </>
+                                        {o.created_at !== null && o.created_at !== undefined &&
+                                            o.created_at.slice(0, 10)
                                         }
                                     </td>
+                                    <td className="px-6 py-4">
+                                        {o.delivered_at !== null && o.delivered_at !== undefined &&
+                                            o.delivered_at.slice(0, 10)
+                                        }
+                                    </td>
+
                                     <td className="px-6 py-4">
                                         {o.user}
                                     </td>
@@ -171,8 +172,8 @@ const Orders = ({ results }: Props) => {
                 )}
             </table>
         </div >
-     
-        
+
+
 
 
     )

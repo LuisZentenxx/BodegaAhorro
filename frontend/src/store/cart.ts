@@ -29,10 +29,13 @@ export const useCartStore = create(persist<State & Actions>((set, get) => ({
   })
  },
 
+/* The `addToCart` function is responsible for adding a product to the cart. */
  addToCart: (product: Product) => {
   const cart = get().cart
   const cartItem = cart.find(item => item.id === product.id)
 
+/* The code block you provided is a conditional statement that checks if the `cartItem` exists in the
+cart. */
   if (cartItem) {
    const updatedCart = cart.map(item =>
     item.id === product.id ? { ...item, quantity: (item.quantity as number) + 1 } : item
@@ -44,6 +47,8 @@ export const useCartStore = create(persist<State & Actions>((set, get) => ({
   } else {
    const updatedCart = [...cart, { ...product, quantity: 1 }]
 
+ /* The `set` function is used to update the state of the cart. In this code block, it is updating the
+ `cart` and `totalPrice` properties of the state. */
    set(state => ({
     cart: updatedCart,
     totalPrice: state.totalPrice + Number(product.price),

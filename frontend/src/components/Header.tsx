@@ -22,17 +22,28 @@ const Header = () => {
 
     let is_admin: boolean;
     let user_id: number;
-    
+
+    /* The above code is checking if the user is authenticated (isAuth). If the user is authenticated,
+    it decodes the JWT token (token) using the jwt_decode function and assigns the decoded token to
+    the tokenDecoded variable. It then checks if the decoded token has the property "is_staff" and
+    assigns its value to the is_admin variable. It also assigns the value of the "user_id" property
+    from the decoded token to the user_id variable. */
     if (isAuth) {
         const tokenDecoded: Token = jwt_decode(token)
         is_admin = tokenDecoded.is_staff
         user_id = tokenDecoded.user_id;
     }
 
+    /* The above code is using the `useQuery` hook from a library (possibly React Query) to fetch data
+    for a single user. It is passing an object with two properties to the `useQuery` hook: */
     const { data: user } = useQuery({
         queryKey: ['users'],
         queryFn: () => get_solo_user(user_id)
     })
+
+
+    /* The above code is a TypeScript React code snippet. It defines a function component that uses a
+    custom hook called `useSearchStore` to access the `setSearchTerm` function from the state. */
 
     const serSearchTerm = useSearchStore((state) => state.setSearchTerm);
 
@@ -40,11 +51,23 @@ const Header = () => {
         serSearchTerm(event.target.value)
     }
 
+    /**
+     * The function logs out the user and redirects them to the login page.
+     */
     function logOutFun() {
         useAuthStore.getState().logout()
         window.location.href = '/login'
     }
 
+    /**
+     * The `classNames` function takes in an array of classes and returns a string with all the
+     * non-falsy classes joined together with a space.
+     * @param {any} classes - The `classes` parameter is a rest parameter that allows you to pass in
+     * any number of arguments. Each argument represents a class name that you want to include in the
+     * final output.
+     * @returns a string that contains all the non-empty classes joined together with a space in
+     * between.
+     */
     function classNames(...classes: any) {
         return classes.filter(Boolean).join(' ')
     }
@@ -85,7 +108,7 @@ const Header = () => {
 
                                                 )}
 
-                                        
+
                                                 <Link
                                                     to={'/'}
                                                     className='p-2 px-4 rounded-lg text-white hover:font-bold dark:text-slate-800'
@@ -205,7 +228,7 @@ const Header = () => {
                                                             to="/profile"
                                                             className={classNames(active ? 'bg-gray-100 dark:bg-slate-700' : '', 'block px-4 py-2 text-sm text-gray-700 dark:text-slate-200')}
                                                         >
-                                                            Tu Perfil
+                                                            Mi Perfil
                                                         </Link>
                                                     )}
                                                 </Menu.Item>

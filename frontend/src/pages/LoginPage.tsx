@@ -22,13 +22,20 @@ const LoginPage = () => {
       navigate("/");
     },
     onError: (error) => {
-      toast.error("Hubo un error")
+      toast.error("Credenciales Inválidas")
       console.error(error)
     }
   });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+     // Validar campos vacíos
+     if (!email || !password) {
+      toast.error("Por favor completa todos los campos.");
+      return;
+    }
+
     loginMutation.mutate()
   };
 
@@ -67,6 +74,9 @@ const LoginPage = () => {
             <button type="submit" className="w-full text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg text-sm px-5 py-2.5 text-center dark:bg-slate-200 dark:text-slate-800 dark:hover:bg-blue-100 dark:focus:ring-primary-800">Iniciar Sesión</button>
             <p className="text-sm font-semibold text-slate-800 dark:text-slate-300">
               ¿No tienes una cuenta aún? <Link to={'/register'} className="font-bold text-slate-800 hover:underline dark:text-blue-300">Registrate ya!</Link>
+            </p>
+            <p className="text-sm font-semibold text-slate-800 dark:text-slate-300">
+              ¿Olvidaste tu contraseña? <Link to={'/resetPassword'} className="font-bold text-slate-800 hover:underline dark:text-blue-300">Recuperala aquí!</Link>
             </p>
           </form>
         </div>

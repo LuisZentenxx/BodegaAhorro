@@ -1,6 +1,14 @@
 import { authAxios } from "./useAxios";
 import { Order } from "../Interfaces";
 
+/**
+ * This code exports several functions related to searching, editing, getting, and creating orders.
+ * @param {string} query - A string used for searching orders.
+ * @returns The functions `search_order`, `get_orders`, `solo_order`, and `my_orders` are returning the
+ * `data` property of the response object. The function `edit_order` is not returning anything. The
+ * function `create_order` is not returning anything.
+ */
+
 export const search_order = async (query: string) => {
     const response = await authAxios.get(`/orders/search/?query=${query}`);
     return response.data;

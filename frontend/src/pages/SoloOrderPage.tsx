@@ -32,14 +32,22 @@ const SoloOrderPage = () => {
             pdf.setFontSize(14);
             pdf.text(`ID Compra: ${data.id}`, 20, 30);
             pdf.text(`Fecha Compra: ${data.created_at ? data.created_at.slice(0, 10) : ""}`, 20, 45);
-            pdf.text(`Fecha Entrega: ${data.delivered_at ? data.delivered_at.slice(0, 10) : ""}`, 20, 60);
+            pdf.text(`Fecha Entrega: ${data.delivered_at ? data.delivered_at.slice(0, 10) : "No entregado"}`, 20, 60);
+
 
             // Detalles de productos
             pdf.setFontSize(16);
             pdf.text("Detalle de Productos", 20, 80);
 
-          
-           
+            const headers = ["Cantidad", "Precio Unitario", "Precio Total"];
+            const rows = data.order_items.map((p: any) => [p.quantity, `$${p.price}`, `$${p.price * p.quantity}`]);
+
+            pdf.autoTable({
+                head: [headers],
+                body: rows,
+                startY: 95,
+                theme: 'striped',
+            });
 
             // Total de la compra
             const totalYPosition = 95 + data.order_items.length * 20 + 10;
@@ -80,7 +88,7 @@ const SoloOrderPage = () => {
                         </th>
 
                         <th scope="col" className="px-4 py-3 text-gray-200">
-                            Fecha Entrega
+                            Fecha Compra
                         </th>
 
                         <th scope="col" className="px-4 py-3 text-gray-200">
@@ -88,7 +96,7 @@ const SoloOrderPage = () => {
                         </th>
 
                         <th scope="col" className="px-4 py-3 text-gray-200">
-                            Fecha Compra
+                            Fecha Entrega
                         </th>
                     </tr>
                 </thead>
@@ -125,11 +133,15 @@ const SoloOrderPage = () => {
                         </td>
 
                         <td className="px-4 py-3">
-                            {data && data.delivered_at !== undefined && (
+                            {data && data.delivered_at !== null && data.delivered_at !== undefined ? (
                                 <>
+                                    {console.log("Fecha de entrega:", data.delivered_at)}
                                     {data.delivered_at.slice(0, 10)}
                                 </>
+                            ) : (
+                                "Sin registro"
                             )}
+
                         </td>
                     </tr>
                 </tbody>

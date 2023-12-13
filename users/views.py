@@ -1,3 +1,5 @@
+from sqlite3 import IntegrityError
+from django.http import JsonResponse
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth.hashers import make_password
 from rest_framework.decorators import api_view, permission_classes
@@ -12,7 +14,6 @@ from .serializers import (
     MyTokenObtainPairSerializer,
     UserSerializer,
 )
-
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -70,13 +71,19 @@ def get_users(request):
 
 @api_view(["POST"])
 def register(request):
-    data = request.data
-    user = User.objects.create(
-        email=data["email"], name=data["name"], password=make_password(data["password"])
-    )
-    serializer = RegisterUserSerializer(user, many=False)
-    return Response(serializer.data)
+    try:
+        data = request.data
+        user = User.objects.create(
+            email=data["email"], name=data["name"], password=make_password(data["password"])
+        )
+        serializer = RegisterUserSerializer(user, many=False)
+        return Response(serializer.data)
+    except IntegrityError as e:
+        return JsonResponse({'error': 'El correo ya ha sido registrado'}, status=409)
 
+@api_view(["POST"])
+def resetView(request):
+    return Response()
 
 class LoginView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer

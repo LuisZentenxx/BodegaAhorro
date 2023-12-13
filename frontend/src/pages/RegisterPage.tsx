@@ -21,15 +21,37 @@ const RegisterPage = () => {
   const registerMutation = useMutation({
     mutationFn: () => registerRequest(email, name, password),
     onSuccess: () => {
-      toast.success("Registro exitoso")
+      toast.success("Registro exitoso");
       navigate("/login");
     },
     onError: (error) => {
-      toast.error("Hubo un error")
-      console.error(error)
+      if (isErrorWithResponse(error)) {
+        const errorMessage = error.response.data?.error || "El correo ya ha sido registrado";
+        toast.error(errorMessage);
+        console.error(errorMessage);
+      } else {
+        toast.error("Hubo un error");
+        console.error(error);
+      }
     }
   });
-
+  
+  const isErrorWithResponse = (error: unknown): error is {
+    response: {
+      data: { error?: string };
+      status: number;
+    };
+  } => {
+    return (
+      typeof error === "object" &&
+      error !== null &&
+      "response" in error &&
+      typeof (error as any).response === "object" &&
+      (error as any).response !== null &&
+      "status" in (error as any).response
+    );
+  };
+  
   const handleMatch = () => {
     if (password !== rePassword || password.length < 6) {
       return {
@@ -44,16 +66,28 @@ const RegisterPage = () => {
   const matchResult = handleMatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    if (password !== rePassword) {
-      toast.error("Las contraseñas deben coincidir")
+    event.preventDefault();
 
-    } if (password.length < 6 || rePassword.length < 6) {
-      toast.error("La contraseña debe tener 6 caracteres minimo")
+    // Validar campos vacíos
+    if (!email || !name || !password || !rePassword) {
+      toast.error("Por favor completa todos los campos.");
+      return;
     }
-    else {
-      registerMutation.mutate()
+
+    // Validar coincidencia de contraseñas
+    if (password !== rePassword) {
+      toast.error("Las contraseñas deben coincidir");
+      return;
     }
+
+    // Validar longitud mínima de contraseñas
+    if (password.length < 6 || rePassword.length < 6) {
+      toast.error("La contraseña debe tener al menos 6 caracteres");
+      return;
+    }
+
+    // Ejecutar la mutación solo si todas las validaciones pasan
+    registerMutation.mutate();
   };
 
   if (registerMutation.isLoading) return <p>Loading...</p>

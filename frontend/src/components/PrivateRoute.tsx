@@ -18,3 +18,4 @@ export const AdminPrivateRoute = () => {
         isAdmin ? <Outlet /> : <Navigate to='/'/>
     );
 };
+    

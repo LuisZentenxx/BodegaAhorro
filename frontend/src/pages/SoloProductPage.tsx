@@ -14,8 +14,19 @@ const SoloProductPage = () => {
         queryFn: () => get_solo(slug || ''),
     })
 
-    if (isError) return toast.error("Error")
-    if (isLoading) return <Loader />
+    if (isError) {
+        toast.error("Error");
+        return null;  // No renderizar nada en caso de error
+    }
+
+    if (isLoading) {
+        return <Loader />;
+    }
+
+    // Verificar si data está disponible antes de acceder a sus propiedades
+    if (!data) {
+        return null;  // No renderizar nada si no hay datos
+    }
 
 
     return (

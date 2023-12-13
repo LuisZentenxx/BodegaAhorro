@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Footer = () => {
 
+    /* The above code is a React component written in TypeScript. It defines two state variables,
+    `isModalOpen` and `isModalOpenTeam`, using the `useState` hook. These variables are used to control
+    the visibility of two different modals. */
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpenTeam, setIsModalOpenTeam] = useState(false);
+    const [isModalOpenContact, setIsModalOpenContact] = useState(false);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -24,7 +29,54 @@ const Footer = () => {
     };
 
 
+    const closeModalContact = () => {
+        setIsModalOpenContact(false);
+    };
 
+    const openModalContact = (e: any) => {
+        e.preventDefault();
+        console.log("Abriendo modal");
+        setIsModalOpenContact(true);
+    };
+
+    const openEmailClient = () => {
+        const emailText = document.getElementById("email")?.innerText;
+
+        if (emailText) {
+            const mailtoLink = `mailto:${emailText}`;
+            window.location.href = mailtoLink;
+        }
+    };
+
+    const copyToClipboard = () => {
+        const emailText = document.getElementById("email")?.innerText;
+
+        if (emailText) {
+            navigator.clipboard.writeText(emailText)
+                .then(() => alert("Correo copiado al portapapeles: " + emailText))
+                .catch(error => console.error("Error al copiar al portapapeles: ", error));
+        }
+
+    };
+
+    useEffect(() => {
+        const emailElement = document.getElementById("email");
+        const emailIcon = document.getElementById("gmailIcon");
+
+        if (emailElement && emailIcon) {
+            emailElement.addEventListener("click", copyToClipboard);
+            emailIcon.addEventListener("click", openEmailClient);
+        }
+
+
+        return () => {
+            if (emailElement && emailIcon) {
+                emailElement.removeEventListener("click", copyToClipboard);
+                emailIcon.removeEventListener("click", openEmailClient);
+            }
+
+        };
+    }, []);
 
     return (
         <footer className="bg-red-800 dark:bg-gray-200">
@@ -45,6 +97,11 @@ const Footer = () => {
                                 Equipo de Desarrollo
                             </a>
 
+
+                            {/*isModalOpenTeam` state variable. When the modal is open, it displays a list of team members with
+                                their names and roles. Each team member is represented as a radio button with a corresponding label.
+                                The modal also includes a close button to close the modal.*/
+                            }
                             {isModalOpenTeam && (
 
                                 <div
@@ -124,11 +181,79 @@ const Footer = () => {
                         </li>
 
 
-
                         <li>
-                            <a href="#" className="hover:underline me-4 md:me-6 text-gray-200 dark:text-slate-800">Acerca de</a>
-                        </li>
+                            <a
+                                href="#"
+                                onClick={openModalContact}
+                                className="hover:underline me-4 md:me-6 text-gray-200 dark:text-slate-800"
+                                type="button"
+                            >
+                                Contactanos
+                            </a>
 
+
+                            {/*isModalOpenTeam` state variable. When the modal is open, it displays a list of team members with
+                                their names and roles. Each team member is represented as a radio button with a corresponding label.
+                                The modal also includes a close button to close the modal.*/
+                            }
+                            {isModalOpenContact && (
+
+                                <div
+                                    id="select-modal"
+                                    tabIndex={-1}
+                                    aria-hidden="true"
+                                    className="fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-full overflow-y-auto bg-black bg-opacity-50"
+                                >
+                                    <div className="relative p-4 w-full max-w-md max-h-full">
+
+                                        <div className="relative bg-slate-700 rounded-lg shadow dark:bg-gray-700">
+
+                                            <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                                <h3 className="text-lg font-semibold text-white dark:text-white">
+                                                    Contactanos
+                                                </h3>
+                                                <button
+                                                    type="button"
+                                                    onClick={closeModalContact}
+                                                    className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                >
+                                                    <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                    </svg>
+                                                    <span className="sr-only">Close modal</span>
+                                                </button>
+                                            </div>
+
+                                            <div className="p-4 md:p-5">
+                                                <ul className="space-y-4 mb-4">
+                                                    <li>
+                                                        <input type="radio" id="job-1" name="job" value="job-1" className="hidden peer" required />
+                                                        <label htmlFor="job-1" className="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-slate-700 border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-500 dark:peer-checked:text-blue-500 peer-checked:border-blue-300 peer-checked:text-blue-600 hover:bg-slate-800 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">
+                                                            <div className="block">
+                                                                <div className="w-full text-lg font-semibold text-white dark:text-gray-200">Bodega Ahorro</div>
+                                                                <div id="email" className="w-full text-gray-200 dark:text-white">contacto@bodegaahorro.cl</div>
+                                                            </div>
+                                                            <svg id="gmailIcon" width="40" height="40" viewBox="7.086 -169.483 1277.149 1277.149" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M1138.734 931.095h.283M1139.017 931.095h-.283" /><path d="M1179.439 7.087c57.543 0 104.627 47.083 104.627 104.626v30.331l-145.36 103.833-494.873 340.894L148.96 242.419v688.676h-37.247c-57.543 0-104.627-47.082-104.627-104.625V111.742C7.086 54.198 54.17 7.115 111.713 7.115l532.12 394.525L1179.41 7.115l.029-.028z" fill="#e75a4d" /><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#a)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><path fill="#e7e4d7" d="M148.96 242.419v688.676h989.774V245.877L643.833 586.771z" /><path fill="#b8b7ae" d="M148.96 931.095l494.873-344.324-2.24-1.586L148.96 923.527z" /><path fill="#b7b6ad" d="M1138.734 245.877l.283 685.218-495.184-344.324z" /><path d="M1284.066 142.044l.17 684.51c-2.494 76.082-35.461 103.238-145.219 104.514l-.283-685.219 145.36-103.833-.028.028z" fill="#b2392f" /><linearGradient id="b" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#b)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><linearGradient id="c" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#c)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><linearGradient id="d" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#d)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><linearGradient id="e" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#e)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><linearGradient id="f" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#f)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#g)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><linearGradient id="h" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#h)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><path fill="#f7f5ed" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /></svg>
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" id="job-2" name="job" value="job-2" className="hidden peer" />
+                                                        <label htmlFor="job-2" className="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-slate-700 border border-gray-200 rounded-lg cursor-pointer peer-checked:border-[#53C1DE] hover:bg-slate-800 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">
+                                                            <div className="block">
+                                                                <div className="w-full text-lg text-white font-semibold">Soporte Técnico</div>
+                                                                <div id="email2" className="w-full text-gray-200 dark:text-white">soporte@synergy.cl</div>
+                                                            </div>
+                                                            <svg id="gmailIcon2" width="40" height="40" viewBox="7.086 -169.483 1277.149 1277.149" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M1138.734 931.095h.283M1139.017 931.095h-.283" /><path d="M1179.439 7.087c57.543 0 104.627 47.083 104.627 104.626v30.331l-145.36 103.833-494.873 340.894L148.96 242.419v688.676h-37.247c-57.543 0-104.627-47.082-104.627-104.625V111.742C7.086 54.198 54.17 7.115 111.713 7.115l532.12 394.525L1179.41 7.115l.029-.028z" fill="#e75a4d" /><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#a)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><path fill="#e7e4d7" d="M148.96 242.419v688.676h989.774V245.877L643.833 586.771z" /><path fill="#b8b7ae" d="M148.96 931.095l494.873-344.324-2.24-1.586L148.96 923.527z" /><path fill="#b7b6ad" d="M1138.734 245.877l.283 685.218-495.184-344.324z" /><path d="M1284.066 142.044l.17 684.51c-2.494 76.082-35.461 103.238-145.219 104.514l-.283-685.219 145.36-103.833-.028.028z" fill="#b2392f" /><linearGradient id="b" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#b)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><linearGradient id="c" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#c)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><linearGradient id="d" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#d)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><linearGradient id="e" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#e)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><linearGradient id="f" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#f)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#g)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><linearGradient id="h" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213" y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)"><stop offset="0" stop-color="#f8f6ef" /><stop offset="1" stop-color="#e7e4d6" /></linearGradient><path fill="url(#h)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /><path fill="#f7f5ed" d="M111.713 7.087l532.12 394.525L1179.439 7.087z" /></svg>
+                                                        </label>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </li>
                         <li>
                             <a
                                 href="#"
@@ -237,10 +362,10 @@ const Footer = () => {
                 <span className="block text-semibold text-gray-200 sm:text-center dark:text-slate-800">© 2023 Bodega Ahorro</span>
             </div>
             <div className="w-full pt-2 pb-2 text-center bg-gray-200 dark:bg-slate-800">
-            <span className="text-black font-semibold dark:text-white">Desarollado por <a href="https://luiszentenoweb.netlify.app/" className="hover:underline">ReactSynergy™</a></span>
-                </div>
+                <span className="text-black font-semibold dark:text-white">Desarollado por <a href="https://luiszentenoweb.netlify.app/" className="hover:underline">ReactSynergy™</a></span>
+            </div>
         </footer>
-        
+
     )
 }
 

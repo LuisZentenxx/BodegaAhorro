@@ -2,6 +2,17 @@ import { User } from "../Interfaces";
 import { authAxios, axi } from "./useAxios";
 
 
+/**
+ * This code contains various functions for interacting with a user API, including getting a single
+ * user, editing a user, deleting a user, searching for users, getting all users, registering a user,
+ * logging in a user, and getting a paginated list of users.
+ * @param {number} id - The `id` parameter is used to specify the user ID when fetching a solo user,
+ * editing a user, or deleting a user. It is a number that uniquely identifies a user in the system.
+ * @returns The functions `get_solo_user`, `search_users`, `get_users`, and `getUsersRequest` are
+ * returning the response data from the server. The functions `edit_user`, `delete_user`,
+ * `registerRequest`, and `loginRequest` are not returning anything.
+ */
+
 export const get_solo_user = async (id: number) => {
   const response = await authAxios.get(`/users/get/solo/${id}/`)
   return response.data
@@ -36,6 +47,11 @@ export const get_users = async () => {
 export const registerRequest = async (email: string, name: string,  password: string) => {
   await axi.post("/users/register/", {email, name, password})
 };
+
+export const resetPasswordRequest = async (email: string, name: string,  password: string) => {
+  await axi.post("/users/reset/password/", {email, name, password})
+};
+
 
 export const loginRequest = async (email: string, password: string) => {
  const response =  await axi.post("/users/login/", {email, password})
